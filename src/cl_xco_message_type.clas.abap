@@ -1,0 +1,7 @@
+CLASS cl_xco_message_type DEFINITION PUBLIC.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cl_xco_message_type IMPLEMENTATION.
+
+ENDCLASS.
