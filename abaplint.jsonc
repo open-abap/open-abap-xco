@@ -10,7 +10,7 @@
     }
   ],
   "syntax": {
-    "version": "v758",
+    "version": "open-abap",
     "errorNamespace": "."
   },
   "rules": {
