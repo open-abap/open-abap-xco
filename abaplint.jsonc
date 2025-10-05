@@ -546,11 +546,7 @@
       "skipNames": []
     },
     "unused_methods": true,
-    "unused_types": {
-      "exclude": [],
-      "severity": "Error",
-      "skipNames": []
-    },
+    "unused_types": false,
     "unused_variables": {
       "exclude": [],
       "severity": "Error",
