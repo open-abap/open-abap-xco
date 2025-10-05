@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_software_component_f PUBLIC.
+
+ENDINTERFACE.
