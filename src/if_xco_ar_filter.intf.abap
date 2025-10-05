@@ -1,0 +1,3 @@
+INTERFACE if_xco_ar_filter PUBLIC.
+
+ENDINTERFACE.

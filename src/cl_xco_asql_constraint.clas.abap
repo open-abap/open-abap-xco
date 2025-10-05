@@ -1,0 +1,7 @@
+CLASS cl_xco_asql_constraint DEFINITION PUBLIC.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cl_xco_asql_constraint IMPLEMENTATION.
+
+ENDCLASS.
