@@ -1,0 +1,3 @@
+INTERFACE if_xco_behavior_definition PUBLIC.
+
+ENDINTERFACE.

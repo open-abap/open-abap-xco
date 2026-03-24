@@ -1,0 +1,7 @@
+CLASS cl_xco_ddef_object_state DEFINITION PUBLIC.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cl_xco_ddef_object_state IMPLEMENTATION.
+
+ENDCLASS.

@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_cds_api_annotations PUBLIC.
+
+ENDINTERFACE.
