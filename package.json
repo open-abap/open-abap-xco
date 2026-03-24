@@ -1,16 +1,11 @@
 {
   "name": "open-abap-xco",
   "version": "1.0.0",
+  "private": true,
   "description": "XCO",
-  "main": "index.js",
   "scripts": {
     "lint": "abaplint",
     "unit": "rm -rf output && abap_transpile && echo RUNNING && node --expose-gc output/index.mjs && echo OK",
-    "flame": "0x -o -- node --expose-gc test/performance.mjs",
-    "performance": "rm -rf output && abap_transpile ./abap_transpile_test.json && node --expose-gc test/performance.mjs",
-    "integration": "rm -rf output && abap_transpile ./abap_transpile_test.json && node --expose-gc output/index.mjs",
-    "postgres:init": "cat test/adbc/init.sql | docker exec -i postgresql psql -U postgres -d postgres",
-    "docker:start": "docker compose -p open-abap -f test/stack.yml up -d --wait && npm run postgres:init",
     "test": "npm run lint && npm run unit"
   },
   "repository": {
@@ -18,15 +13,15 @@
     "url": "git+https://github.com/open-abap/open-abap-xco.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "",
   "bugs": {
     "url": "https://github.com/open-abap/open-abap-xco/issues"
   },
   "homepage": "https://github.com/open-abap/open-abap-xco#readme",
     "dependencies": {
-    "@abaplint/cli": "^2.113.222",
-    "@abaplint/runtime": "^2.12.2",
+    "@abaplint/cli": "^2.118.3",
+    "@abaplint/runtime": "^2.13.1",
     "@abaplint/database-sqlite": "^2.11.78",
-    "@abaplint/transpiler-cli": "^2.12.2"
+    "@abaplint/transpiler-cli": "^2.13.1"
   }
 }
