@@ -7,6 +7,7 @@ CLASS xco_cp_cds DEFINITION PUBLIC.
       provider_contract           TYPE REF TO cl_xco_cp_cds_prvdr_cntrct_f READ-ONLY,
       annotations                 TYPE REF TO if_xco_cp_cds_api_annotations READ-ONLY.
 
+
     CLASS-METHODS:
       access_control
         IMPORTING
