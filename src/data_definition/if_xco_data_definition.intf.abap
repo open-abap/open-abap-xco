@@ -2,6 +2,8 @@ INTERFACE if_xco_data_definition PUBLIC.
 
   DATA name TYPE sxco_cds_object_name READ-ONLY.
 
+  ALIASES exists FOR if_xco_ar_object~exists.
+
   METHODS:
     check_syntax
       RETURNING
