@@ -1,0 +1,7 @@
+CLASS cl_xco_cds_cardinality_f DEFINITION PUBLIC.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cl_xco_cds_cardinality_f IMPLEMENTATION.
+
+ENDCLASS.

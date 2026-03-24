@@ -1,0 +1,3 @@
+INTERFACE if_xco_cds_abstract_entity PUBLIC.
+
+ENDINTERFACE.

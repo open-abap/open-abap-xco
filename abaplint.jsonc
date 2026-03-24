@@ -14,6 +14,8 @@
     "errorNamespace": "."
   },
   "rules": {
+    "unused_variables": false, // todo
+
     "7bit_ascii": true,
     "abapdoc": false,
     "add_test_attributes": true,
@@ -77,27 +79,10 @@
       "skipNames": []
     },
     "check_abstract": true,
-    "check_comments": {
-      "exclude": [],
-      "severity": "Error",
-      "allowEndOfLine": false
-    },
+    "check_comments": false,
     "check_ddic": true,
     "check_include": true,
-    "check_subrc": {
-      "exclude": [],
-      "severity": "Error",
-      "openDataset": true,
-      "authorityCheck": true,
-      "selectSingle": true,
-      "selectTable": true,
-      "updateDatabase": true,
-      "insertDatabase": true,
-      "modifyDatabase": true,
-      "readTable": true,
-      "assign": true,
-      "find": true
-    },
+    "check_subrc": true,
     "check_syntax": true,
     "check_text_elements": true,
     "check_transformation_exists": true,
@@ -106,11 +91,7 @@
     "cloud_types": true,
     "colon_missing_space": true,
     "commented_code": true,
-    "constant_classes": {
-      "exclude": [],
-      "severity": "Error",
-      "mapping": []
-    },
+    "constant_classes": true,
     "constructor_visibility_public": true,
     "contains_tab": true,
     "cyclic_oo": false,
@@ -358,38 +339,7 @@
     },
     "nrob_consistency": true,
     "object_naming": false,
-    "obsolete_statement": {
-      "exclude": [],
-      "severity": "Error",
-      "refresh": true,
-      "compute": true,
-      "add": true,
-      "subtract": true,
-      "multiply": true,
-      "divide": true,
-      "move": true,
-      "requested": true,
-      "occurs": true,
-      "setExtended": true,
-      "withHeaderLine": true,
-      "fieldSymbolStructure": true,
-      "typePools": true,
-      "load": true,
-      "parameter": true,
-      "ranges": true,
-      "communication": true,
-      "pack": true,
-      "selectWithoutInto": true,
-      "freeMemory": true,
-      "exitFromSQL": true,
-      "sortByFS": true,
-      "callTransformation": true,
-      "regex": true,
-      "occurences": true,
-      "clientSpecified": true,
-      "formDefinition": true,
-      "formImplementation": true
-    },
+    "obsolete_statement": true,
     "omit_parameter_name": true,
     "omit_preceding_zeros": true,
     "omit_receiving": true,
@@ -404,44 +354,11 @@
     "prefer_corresponding": true,
     "prefer_inline": true,
     "prefer_is_not": true,
-    "prefer_pragmas": {
-      "exclude": [],
-      "severity": "Error",
-      "check": [
-        {
-          "pseudo": "#EC CI_SUBRC",
-          "pragma": "SUBRC_OK"
-        },
-        {
-          "pseudo": "#EC NEEDED",
-          "pragma": "NEEDED"
-        },
-        {
-          "pseudo": "#EC NOTEXT",
-          "pragma": "NO_TEXT"
-        },
-        {
-          "pseudo": "#EC NO_HANDLER",
-          "pragma": "NO_HANDLER"
-        }
-      ]
-    },
+    "prefer_pragmas": true,
     "prefer_raise_exception_new": true,
     "prefer_returning_to_exporting": true,
     "prefer_xsdbool": true,
-    "preferred_compare_operator": {
-      "exclude": [],
-      "severity": "Error",
-      "badOperators": [
-        "EQ",
-        "><",
-        "NE",
-        "GE",
-        "GT",
-        "LT",
-        "LE"
-      ]
-    },
+    "preferred_compare_operator": true,
     "prefix_is_current_class": {
       "exclude": [],
       "severity": "Error",
@@ -553,12 +470,6 @@
     },
     "unused_methods": true,
     "unused_types": false,
-    "unused_variables": {
-      "exclude": [],
-      "severity": "Error",
-      "skipNames": [],
-      "skipAbstract": false
-    },
     "use_bool_expression": true,
     "use_class_based_exceptions": true,
     "use_line_exists": true,

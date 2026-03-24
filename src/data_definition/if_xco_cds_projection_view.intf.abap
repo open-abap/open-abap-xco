@@ -1,0 +1,3 @@
+INTERFACE if_xco_cds_projection_view PUBLIC.
+
+ENDINTERFACE.
