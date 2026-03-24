@@ -18,12 +18,18 @@
     "abapdoc": false,
     "add_test_attributes": true,
     "align_parameters": true,
+    "aff_and_xml": true,
+    "cds_association_name": true,
+    "cds_field_order": true,
+    "cds_naming": true,
+    "fm_global_parameters_obsolete": true,
+    "identical_move": true,
+    "index_completely_contained": true,
+    "no_comments_between_methods": true,
+    "parser_bad_exceptions": true,
+    "selection_screen_texts_missing": true,
     "align_pseudo_comments": true,
-    "align_type_expressions": {
-      "exclude": [],
-      "severity": "Error",
-      "ignoreExceptions": true
-    },
+    "align_type_expressions": true,
     "allowed_object_naming": true,
     "allowed_object_types": {
       "exclude": [],
