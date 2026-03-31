@@ -1,0 +1,3 @@
+INTERFACE if_xco_cds_parameters_fctry PUBLIC.
+
+ENDINTERFACE.
