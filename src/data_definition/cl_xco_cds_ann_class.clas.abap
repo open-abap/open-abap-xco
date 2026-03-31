@@ -1,3 +1,4 @@
+
 CLASS cl_xco_cds_ann_class DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS of
