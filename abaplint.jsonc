@@ -246,7 +246,9 @@
       "count": 1
     },
     "line_break_style": false,
-    "line_length": true,
+    "line_length": {
+      "length": 140
+    },
     "line_only_punc": true,
     "local_class_naming": {
       "exclude": [],
