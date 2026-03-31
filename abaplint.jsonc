@@ -226,9 +226,7 @@
     "intf_referencing_clas": false,
     "invalid_table_index": true,
     "keep_single_parameter_on_one_line": {
-      "exclude": [],
-      "severity": "Error",
-      "length": 120
+      "length": 140
     },
     "keyword_case": {
       "exclude": [],
