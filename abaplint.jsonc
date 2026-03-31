@@ -226,9 +226,7 @@
     "intf_referencing_clas": false,
     "invalid_table_index": true,
     "keep_single_parameter_on_one_line": {
-      "exclude": [],
-      "severity": "Error",
-      "length": 120
+      "length": 140
     },
     "keyword_case": {
       "exclude": [],
@@ -248,7 +246,9 @@
       "count": 1
     },
     "line_break_style": false,
-    "line_length": true,
+    "line_length": {
+      "length": 140
+    },
     "line_only_punc": true,
     "local_class_naming": {
       "exclude": [],
