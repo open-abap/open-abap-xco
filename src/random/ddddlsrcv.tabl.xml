@@ -8,6 +8,7 @@
     <TABCLASS>STRU</TABCLASS>
     <DDTEXT>DDL source view</DDTEXT>
     <MAINFLAG>X</MAINFLAG>
+    <EXCLASS>3</EXCLASS>
    </DD02V>
    <DD03P_TABLE>
     <DD03P>
