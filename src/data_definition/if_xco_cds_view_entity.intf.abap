@@ -4,6 +4,7 @@ INTERFACE if_xco_cds_view_entity PUBLIC.
 
   ALIASES name   FOR if_xco_cds_entity~name.
   ALIASES fields FOR if_xco_cds_entity~fields.
+  ALIASES exists FOR if_xco_ar_object~exists.
 
   DATA associations TYPE REF TO if_xco_cds_associations_fctry READ-ONLY.
   DATA compositions TYPE REF TO if_xco_cds_compositions_fctry READ-ONLY.
