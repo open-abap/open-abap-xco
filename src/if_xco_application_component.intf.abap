@@ -1,0 +1,3 @@
+INTERFACE if_xco_application_component PUBLIC.
+
+ENDINTERFACE.
