@@ -1,0 +1,7 @@
+CLASS cx_dd_ddl_exception DEFINITION PUBLIC INHERITING FROM cx_static_check ABSTRACT.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cx_dd_ddl_exception IMPLEMENTATION.
+
+ENDCLASS.
