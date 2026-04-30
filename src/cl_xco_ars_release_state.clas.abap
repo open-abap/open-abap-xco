@@ -1,0 +1,7 @@
+CLASS cl_xco_ars_release_state DEFINITION PUBLIC.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cl_xco_ars_release_state IMPLEMENTATION.
+
+ENDCLASS.
