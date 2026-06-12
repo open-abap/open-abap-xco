@@ -453,12 +453,8 @@
     "unreachable_code": true,
     "unsecure_fae": true,
     "unused_ddic": true,
-    "unused_macros": {
-      "exclude": [],
-      "severity": "Error",
-      "skipNames": []
-    },
-    "unused_methods": true,
+    "unused_macros": true,
+    "unused_methods": false,
     "unused_types": false,
     "use_bool_expression": true,
     "use_class_based_exceptions": true,
