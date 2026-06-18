@@ -1,0 +1,7 @@
+CLASS xco_cp_table DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    CLASS-DATA origin TYPE REF TO cl_xco_cp_table_origin READ-ONLY.
+ENDCLASS.
+
+CLASS xco_cp_table IMPLEMENTATION.
+ENDCLASS.
