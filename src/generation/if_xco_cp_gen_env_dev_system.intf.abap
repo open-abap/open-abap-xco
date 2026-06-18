@@ -1,6 +1,6 @@
 INTERFACE if_xco_cp_gen_env_dev_system PUBLIC.
   TYPES: BEGIN OF ts_for,
-           devc TYPE REF TO if_xco_cp_gen_devc_env,
+           devc TYPE REF TO if_xco_cp_gen_devc_d_api,
          END OF ts_for.
 
   DATA for TYPE ts_for READ-ONLY.

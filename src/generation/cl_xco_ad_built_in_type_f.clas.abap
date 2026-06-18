@@ -1,0 +1,131 @@
+CLASS cl_xco_ad_built_in_type_f DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    DATA accp TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA clnt TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA cuky TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA dats TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA df16_raw TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA df34_raw TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA fltp TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA int1 TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA int2 TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA int4 TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA int8 TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA lang TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+    DATA tims TYPE REF TO if_xco_ad_built_in_type_rfrnc READ-ONLY.
+
+    METHODS char
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS curr
+      IMPORTING iv_length      TYPE i
+                iv_decimals    TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS dec
+      IMPORTING iv_length      TYPE i
+                iv_decimals    TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS df16_dec
+      IMPORTING iv_length      TYPE i
+                iv_decimals    TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS df34_dec
+      IMPORTING iv_length      TYPE i
+                iv_decimals    TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS lchr
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS lraw
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS numc
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS quan
+      IMPORTING iv_length      TYPE i
+                iv_decimals    TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS raw
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS rawstring
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS sstring
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS string
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS unit
+      IMPORTING iv_length      TYPE i
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+    METHODS for
+      IMPORTING iv_type        TYPE csequence
+                iv_length      TYPE i OPTIONAL
+                iv_decimals    TYPE i OPTIONAL
+      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_built_in_type_rfrnc.
+ENDCLASS.
+
+CLASS cl_xco_ad_built_in_type_f IMPLEMENTATION.
+  METHOD char.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD curr.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD dec.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD df16_dec.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD df34_dec.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD lchr.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD lraw.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD numc.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD quan.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD raw.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD rawstring.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD sstring.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD string.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD unit.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
+  METHOD for.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+ENDCLASS.

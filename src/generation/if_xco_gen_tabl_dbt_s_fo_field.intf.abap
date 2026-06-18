@@ -1,5 +1,5 @@
 INTERFACE if_xco_gen_tabl_dbt_s_fo_field PUBLIC.
-  DATA currency_quantity TYPE REF TO if_xco_cp_gen_tabl_curr_qty READ-ONLY.
+  DATA currency_quantity TYPE REF TO if_xco_gen_tabl_s_fo_curr_quan READ-ONLY.
 
   METHODS set_key_indicator
     RETURNING
@@ -9,7 +9,7 @@ INTERFACE if_xco_gen_tabl_dbt_s_fo_field PUBLIC.
       VALUE(ro_field) TYPE REF TO if_xco_gen_tabl_dbt_s_fo_field.
   METHODS set_type
     IMPORTING
-      io_type         TYPE REF TO if_xco_ad_type
+      io_type         TYPE REF TO if_xco_ad_built_in_type_rfrnc
     RETURNING
       VALUE(ro_field) TYPE REF TO if_xco_gen_tabl_dbt_s_fo_field.
 ENDINTERFACE.
