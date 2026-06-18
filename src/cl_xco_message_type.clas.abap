@@ -1,5 +1,6 @@
 CLASS cl_xco_message_type DEFINITION PUBLIC.
   PUBLIC SECTION.
+    DATA value TYPE symsgty READ-ONLY.
 ENDCLASS.
 
 CLASS cl_xco_message_type IMPLEMENTATION.

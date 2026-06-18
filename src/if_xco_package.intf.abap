@@ -19,4 +19,8 @@ INTERFACE if_xco_package PUBLIC.
       RETURNING
         VALUE(rs_package) TYPE ts_object.
 
+  METHODS exists
+    RETURNING
+      VALUE(rv_exists) TYPE abap_bool.
+
 ENDINTERFACE.

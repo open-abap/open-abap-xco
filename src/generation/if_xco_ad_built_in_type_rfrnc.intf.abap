@@ -1,0 +1,2 @@
+INTERFACE if_xco_ad_built_in_type_rfrnc PUBLIC.
+ENDINTERFACE.

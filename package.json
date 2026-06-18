@@ -5,7 +5,7 @@
   "description": "XCO",
   "scripts": {
     "lint": "abaplint",
-    "unit": "rm -rf output && abap_transpile && echo RUNNING && node --expose-gc output/index.mjs && echo OK",
+    "unit": "rimraf output && abap_transpile && echo RUNNING && node --expose-gc output/index.mjs && echo OK",
     "test": "npm run lint && npm run unit"
   },
   "repository": {
@@ -18,10 +18,13 @@
     "url": "https://github.com/open-abap/open-abap-xco/issues"
   },
   "homepage": "https://github.com/open-abap/open-abap-xco#readme",
-    "dependencies": {
-    "@abaplint/cli": "^2.119.27",
-    "@abaplint/runtime": "^2.13.28",
+  "dependencies": {
+    "@abaplint/cli": "^2.119.36",
     "@abaplint/database-sqlite": "^2.11.78",
-    "@abaplint/transpiler-cli": "^2.13.28"
+    "@abaplint/runtime": "^2.13.30",
+    "@abaplint/transpiler-cli": "^2.13.30"
+  },
+  "devDependencies": {
+    "rimraf": "^6.1.3"
   }
 }
