@@ -2,6 +2,8 @@ CLASS cl_xco_cds_cardinality_f DEFINITION PUBLIC.
   PUBLIC SECTION.
     DATA one TYPE REF TO object READ-ONLY.
     DATA zero_to_one TYPE REF TO cl_xco_cds_cardinality_c READ-ONLY.
+    DATA one_to_n TYPE REF TO cl_xco_cds_cardinality_c READ-ONLY.
+    DATA zero_to_n TYPE REF TO cl_xco_cds_cardinality_c READ-ONLY.
 
     METHODS range
       IMPORTING

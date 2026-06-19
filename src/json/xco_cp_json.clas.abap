@@ -1,0 +1,7 @@
+CLASS xco_cp_json DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    CLASS-DATA data TYPE REF TO if_xco_cp_json_data_factory READ-ONLY.
+ENDCLASS.
+
+CLASS xco_cp_json IMPLEMENTATION.
+ENDCLASS.
