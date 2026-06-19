@@ -1,0 +1,7 @@
+CLASS cl_xco_cp_me_layer_f DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    DATA customer TYPE REF TO object READ-ONLY.
+ENDCLASS.
+
+CLASS cl_xco_cp_me_layer_f IMPLEMENTATION.
+ENDCLASS.
