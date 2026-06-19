@@ -1,4 +1,6 @@
 INTERFACE if_xco_ar_objects PUBLIC.
+  INTERFACES if_xco_cts_changeable.
+
   METHODS exists
     IMPORTING io_origin        TYPE string OPTIONAL
     RETURNING VALUE(rv_exists) TYPE abap_bool.
