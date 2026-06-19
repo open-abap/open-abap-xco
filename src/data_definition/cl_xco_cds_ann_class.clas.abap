@@ -11,7 +11,7 @@ ENDCLASS.
 
 CLASS cl_xco_cds_ann_class IMPLEMENTATION.
   METHOD of.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
 ENDCLASS.
