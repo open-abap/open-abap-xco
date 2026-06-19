@@ -68,47 +68,47 @@ ENDCLASS.
 
 CLASS xco_cds IMPLEMENTATION.
   METHOD access_control.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD behavior_definition.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD data_definition.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD metadata_extension.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD entity.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD view.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD view_entity.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD projection_view.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD abstract_entity.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD custom_entity.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD table_function.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
 ENDCLASS.

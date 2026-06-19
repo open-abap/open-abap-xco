@@ -8,7 +8,7 @@ ENDCLASS.
 
 CLASS cl_dd_ddl_handler_factory IMPLEMENTATION.
   METHOD create.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
 ENDCLASS.

@@ -12,7 +12,7 @@ ENDCLASS.
 
 CLASS cl_dd_abap_language_version IMPLEMENTATION.
   METHOD get_abap_language_version.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
 ENDCLASS.

@@ -12,11 +12,11 @@ ENDCLASS.
 
 CLASS cl_xco_ars_api_state IMPLEMENTATION.
   METHOD get_release_state.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD released.
-    RETURN. " todo, implement method
+    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
 ENDCLASS.
