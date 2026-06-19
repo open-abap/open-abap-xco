@@ -7,6 +7,9 @@ INTERFACE if_xco_cp_ar_api_object PUBLIC.
   DATA bdef TYPE REF TO if_xco_cp_ar_api_object_type READ-ONLY.
   DATA srvd TYPE REF TO if_xco_cp_ar_api_object_type READ-ONLY.
   DATA srvb TYPE REF TO if_xco_cp_ar_api_object_type READ-ONLY.
+  DATA dtel TYPE REF TO if_xco_cp_ar_api_object_type READ-ONLY.
+  DATA nont TYPE REF TO if_xco_cp_ar_api_object_type READ-ONLY.
+  DATA ront TYPE REF TO if_xco_cp_ar_api_object_type READ-ONLY.
 
   METHODS for
     IMPORTING

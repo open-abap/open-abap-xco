@@ -1,0 +1,3 @@
+INTERFACE if_xco_gen_clas_s_fo_i_method PUBLIC.
+  TYPES tt_source TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+ENDINTERFACE.

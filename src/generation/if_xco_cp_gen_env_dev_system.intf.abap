@@ -16,4 +16,8 @@ INTERFACE if_xco_cp_gen_env_dev_system PUBLIC.
   METHODS create_put_operation
     RETURNING
       VALUE(ro_put_operation) TYPE REF TO if_xco_cp_gen_d_o_put.
+
+  METHODS create_patch_operation
+    RETURNING
+      VALUE(ro_patch_operation) TYPE REF TO if_xco_cp_gen_o_patch_mass.
 ENDINTERFACE.

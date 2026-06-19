@@ -1,4 +1,5 @@
 INTERFACE if_xco_package PUBLIC.
+  DATA name TYPE REF TO if_xco_ar_object_name READ-ONLY.
 
   TYPES: BEGIN OF ts_object_property,
            application_component       TYPE REF TO if_xco_application_component,
