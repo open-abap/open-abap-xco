@@ -1,7 +1,12 @@
 INTERFACE if_xco_database_table_field_ct PUBLIC.
+  TYPES: BEGIN OF ts_currency_quantity,
+           reference_field TYPE sxco_ad_field_name,
+         END OF ts_currency_quantity.
   TYPES: BEGIN OF ts_content,
-           key_indicator TYPE abap_bool,
-           not_null      TYPE abap_bool,
+           key_indicator     TYPE abap_bool,
+           not_null          TYPE abap_bool,
+           type              TYPE REF TO if_xco_ad_field_type,
+           currency_quantity TYPE ts_currency_quantity,
          END OF ts_content.
 
   METHODS get

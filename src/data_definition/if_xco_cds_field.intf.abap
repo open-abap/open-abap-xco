@@ -1,4 +1,5 @@
 INTERFACE if_xco_cds_field PUBLIC.
+  INTERFACES if_xco_cds_ann_target.
 
   DATA name TYPE sxco_cds_field_name READ-ONLY.
 

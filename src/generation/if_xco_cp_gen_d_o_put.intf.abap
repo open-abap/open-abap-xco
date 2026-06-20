@@ -1,6 +1,7 @@
 INTERFACE if_xco_cp_gen_d_o_put PUBLIC.
   TYPES: BEGIN OF ts_tabl_for,
            database_table TYPE REF TO if_xco_cp_gen_tabl_dbt_dopu_sc,
+           structure      TYPE REF TO if_xco_cp_gen_tabl_str_dopu_sc,
          END OF ts_tabl_for.
   TYPES: BEGIN OF ts_tabl,
            for TYPE ts_tabl_for,
@@ -9,10 +10,12 @@ INTERFACE if_xco_cp_gen_d_o_put PUBLIC.
            tabl TYPE ts_tabl,
            ddls TYPE REF TO if_xco_cp_gen_ddls_d_o_put_sct,
            ddlx TYPE REF TO if_xco_cp_gen_ddls_d_o_put_sct,
-           bdef TYPE REF TO if_xco_cp_gen_ddls_d_o_put_sct,
-           srvd TYPE REF TO if_xco_cp_gen_ddls_d_o_put_sct,
-           srvb TYPE REF TO if_xco_cp_gen_ddls_d_o_put_sct,
+           bdef TYPE REF TO if_xco_cp_gen_bdef_d_o_put_sct,
+           srvd TYPE REF TO if_xco_cp_gen_srvd_d_o_put_sct,
+           srvb TYPE REF TO if_xco_cp_gen_srvb_d_o_put_sct,
            clas TYPE REF TO if_xco_cp_gen_clas_d_o_put_sct,
+           nont TYPE REF TO if_xco_cp_gen_nont_d_o_put_sct,
+           ront TYPE REF TO if_xco_cp_gen_ront_d_o_put_sct,
          END OF ts_for.
 
   DATA for TYPE ts_for READ-ONLY.

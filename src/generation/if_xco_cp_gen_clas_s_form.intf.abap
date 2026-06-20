@@ -6,4 +6,10 @@ INTERFACE if_xco_cp_gen_clas_s_form PUBLIC.
   METHODS set_short_description
     IMPORTING iv_short_description TYPE csequence
     RETURNING VALUE(ro_form)       TYPE REF TO if_xco_cp_gen_clas_s_form.
+  METHODS add_local_class
+    IMPORTING iv_name               TYPE csequence
+    RETURNING VALUE(ro_local_class) TYPE REF TO if_xco_gen_clas_s_form.
+  METHODS remove_local_class
+    IMPORTING iv_name        TYPE csequence
+    RETURNING VALUE(ro_form) TYPE REF TO if_xco_cp_gen_clas_s_form.
 ENDINTERFACE.

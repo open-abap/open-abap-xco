@@ -7,4 +7,12 @@ INTERFACE if_xco_gen_bdef_s_fo_b_mapping PUBLIC.
 
   METHODS set_extensible
     RETURNING VALUE(ro_mapping) TYPE REF TO if_xco_gen_bdef_s_fo_b_mapping.
+  METHODS set_corresponding
+    RETURNING VALUE(ro_mapping) TYPE REF TO if_xco_gen_bdef_s_fo_b_mapping.
+  METHODS set_field_mapping
+    IMPORTING it_field_mappings TYPE tt_field_mapping
+    RETURNING VALUE(ro_mapping) TYPE REF TO if_xco_gen_bdef_s_fo_b_mapping.
+  METHODS set_control
+    IMPORTING iv_control        TYPE csequence
+    RETURNING VALUE(ro_mapping) TYPE REF TO if_xco_gen_bdef_s_fo_b_mapping.
 ENDINTERFACE.

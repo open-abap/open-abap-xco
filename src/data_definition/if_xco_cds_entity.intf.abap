@@ -3,6 +3,7 @@ INTERFACE if_xco_cds_entity PUBLIC.
   INTERFACES:
     if_xco_ar_object,
     if_xco_cds_ann_target,
+    if_xco_gen_cds_s_fo_ann_target,
     if_xco_printable.
 
   DATA fields      TYPE REF TO if_xco_cds_fields_factory READ-ONLY.
@@ -16,9 +17,17 @@ INTERFACE if_xco_cds_entity PUBLIC.
     IMPORTING iv_name               TYPE csequence
     RETURNING VALUE(ro_association) TYPE REF TO if_xco_gen_ddls_s_fo_assoc.
 
+  METHODS add_composition
+    IMPORTING iv_name               TYPE csequence
+    RETURNING VALUE(ro_composition) TYPE REF TO if_xco_gen_ddls_s_fo_assoc.
+
   METHODS add_field
     IMPORTING io_field        TYPE REF TO if_xco_gen_ddls_ddl_expression
     RETURNING VALUE(ro_field) TYPE REF TO if_xco_gen_ddls_s_fo_field.
+
+  METHODS set_where
+    IMPORTING io_condition     TYPE REF TO if_xco_gen_ddls_ddl_expression
+    RETURNING VALUE(ro_entity) TYPE REF TO if_xco_cds_entity.
 
   METHODS set_root
     RETURNING VALUE(ro_entity) TYPE REF TO if_xco_cds_entity.
