@@ -1,0 +1,5 @@
+CLASS cl_abap_behavior_handler DEFINITION PUBLIC ABSTRACT.
+ENDCLASS.
+
+CLASS cl_abap_behavior_handler IMPLEMENTATION.
+ENDCLASS.

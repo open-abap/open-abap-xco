@@ -1,5 +1,6 @@
 CLASS cl_xco_pkg_type DEFINITION PUBLIC.
   PUBLIC SECTION.
+    DATA value TYPE string READ-ONLY.
 ENDCLASS.
 
 CLASS cl_xco_pkg_type IMPLEMENTATION.

@@ -1,5 +1,6 @@
 CLASS cl_xco_dbt_data_maintenance DEFINITION PUBLIC.
   PUBLIC SECTION.
+    DATA value TYPE string READ-ONLY.
     DATA allowed_with_restrictions TYPE string READ-ONLY.
 ENDCLASS.
 

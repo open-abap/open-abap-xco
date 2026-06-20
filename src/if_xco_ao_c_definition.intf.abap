@@ -1,3 +1,7 @@
 INTERFACE if_xco_ao_c_definition PUBLIC.
-  DATA section TYPE REF TO if_xco_ao_c_sections READ-ONLY.
+  TYPES: BEGIN OF ts_sections,
+           public TYPE REF TO if_xco_ao_c_section,
+         END OF ts_sections.
+
+  DATA section TYPE ts_sections READ-ONLY.
 ENDINTERFACE.

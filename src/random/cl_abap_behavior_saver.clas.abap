@@ -1,0 +1,5 @@
+CLASS cl_abap_behavior_saver DEFINITION PUBLIC ABSTRACT.
+ENDCLASS.
+
+CLASS cl_abap_behavior_saver IMPLEMENTATION.
+ENDCLASS.
