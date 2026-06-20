@@ -1,5 +1,7 @@
 CLASS cx_xco_runtime_exception DEFINITION PUBLIC INHERITING FROM CX_NO_CHECK.
   PUBLIC SECTION.
+    INTERFACES if_t100_dyn_msg.
+
     METHODS:
       constructor
         IMPORTING
