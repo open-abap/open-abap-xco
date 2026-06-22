@@ -1,3 +1,4 @@
+
 CLASS cl_xco_tab_ec_0 DEFINITION PUBLIC.
 ENDCLASS.
 
