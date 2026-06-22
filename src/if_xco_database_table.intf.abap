@@ -11,5 +11,5 @@ INTERFACE if_xco_database_table PUBLIC.
 
   METHODS content
     RETURNING
-      VALUE(ro_content) TYPE REF TO if_xco_database_table_content.
+      VALUE(ro_content) TYPE REF TO if_xco_dbt_content.
 ENDINTERFACE.
