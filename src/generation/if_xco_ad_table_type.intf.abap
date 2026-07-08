@@ -1,0 +1,2 @@
+INTERFACE if_xco_ad_table_type PUBLIC.
+ENDINTERFACE.

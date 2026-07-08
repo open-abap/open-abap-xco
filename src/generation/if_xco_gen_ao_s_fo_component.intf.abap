@@ -2,7 +2,7 @@ INTERFACE if_xco_gen_ao_s_fo_component PUBLIC.
   DATA behavior_implementation TYPE REF TO if_xco_gen_clas_s_fo_b_impl READ-ONLY.
 
   METHODS for_table_type
-    IMPORTING io_row_type      TYPE REF TO if_xco_ad_built_in_type_rfrnc OPTIONAL
+    IMPORTING io_row_type      TYPE REF TO if_xco_ad_table_type OPTIONAL
               io_primary_key   TYPE REF TO object OPTIONAL
     RETURNING VALUE(ro_member) TYPE REF TO if_xco_gen_ao_s_fo_component.
   METHODS add_returning_parameter
@@ -12,7 +12,7 @@ INTERFACE if_xco_gen_ao_s_fo_component PUBLIC.
     IMPORTING iv_name          TYPE csequence
     RETURNING VALUE(ro_member) TYPE REF TO if_xco_gen_ao_s_fo_component.
   METHODS set_type
-    IMPORTING io_type          TYPE REF TO if_xco_ad_built_in_type_rfrnc
+    IMPORTING io_type          TYPE REF TO if_xco_ad_table_type
     RETURNING VALUE(ro_member) TYPE REF TO if_xco_gen_ao_s_fo_component.
   METHODS set_read_only
     RETURNING VALUE(ro_member) TYPE REF TO if_xco_gen_ao_s_fo_component.

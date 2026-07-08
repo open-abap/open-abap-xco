@@ -6,7 +6,7 @@ INTERFACE if_xco_gen_ddls_s_fo_field PUBLIC.
   METHODS set_key RETURNING VALUE(ro_field) TYPE REF TO if_xco_gen_ddls_s_fo_field.
   METHODS set_alias IMPORTING iv_alias TYPE csequence RETURNING VALUE(ro_field) TYPE REF TO if_xco_gen_ddls_s_fo_field.
   METHODS set_type
-    IMPORTING io_type         TYPE REF TO if_xco_ad_built_in_type_rfrnc
+    IMPORTING io_type         TYPE REF TO if_xco_ad_table_type
     RETURNING VALUE(ro_field) TYPE REF TO if_xco_gen_ddls_s_fo_field.
   METHODS create_association
     IMPORTING iv_target             TYPE csequence
