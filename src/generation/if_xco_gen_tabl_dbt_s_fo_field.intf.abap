@@ -9,7 +9,7 @@ INTERFACE if_xco_gen_tabl_dbt_s_fo_field PUBLIC.
       VALUE(ro_field) TYPE REF TO if_xco_gen_tabl_dbt_s_fo_field.
   METHODS set_type
     IMPORTING
-      io_type         TYPE REF TO if_xco_ad_built_in_type_rfrnc
+      io_type         TYPE REF TO if_xco_ad_table_type
     RETURNING
       VALUE(ro_field) TYPE REF TO if_xco_gen_tabl_dbt_s_fo_field.
 ENDINTERFACE.
