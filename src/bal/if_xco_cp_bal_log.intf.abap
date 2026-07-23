@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_bal_log PUBLIC.
+
+ENDINTERFACE.
