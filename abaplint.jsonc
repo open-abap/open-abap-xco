@@ -252,22 +252,13 @@
     "many_parentheses": true,
     "max_one_method_parameter_per_line": true,
     "max_one_statement": true,
-    "message_exists": {
-      "exclude": ["cl_xco_cp_std_sy\\.clas\\.testclasses\\.abap"],
-      "severity": "Error",
-      "checkPlaceholders": true
-    },
+    "message_exists": true,
     "method_implemented_twice": true,
     "method_length": true,
     "method_overwrites_builtin": true,
     "method_parameter_names": false,
     "mix_returning": true,
-    "modify_only_own_db_tables": {
-      "exclude": [],
-      "severity": "Error",
-      "reportDynamic": true,
-      "ownTables": "^[yz]"
-    },
+    "modify_only_own_db_tables": true,
     "msag_consistency": {
       "exclude": [],
       "severity": "Error",
