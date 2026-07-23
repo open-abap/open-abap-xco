@@ -242,16 +242,7 @@
       "test": "^LTCL_.+$"
     },
     "local_testclass_consistency": true,
-    "local_variable_names": {
-      "exclude": [],
-      "severity": "Error",
-      "patternKind": "required",
-      "ignoreNames": ["DUMMY", "XCO_MESSAGE"],
-      "ignorePatterns": [],
-      "expectedData": "^L._.+$",
-      "expectedConstant": "^LC_.+$",
-      "expectedFS": "^<L._.+>$"
-    },
+    "local_variable_names": true,
     "macro_naming": {
       "exclude": [],
       "severity": "Error",
@@ -267,14 +258,7 @@
       "checkPlaceholders": true
     },
     "method_implemented_twice": true,
-    "method_length": {
-      "exclude": [],
-      "severity": "Error",
-      "statements": 100,
-      "errorWhenEmpty": true,
-      "ignoreTestClasses": false,
-      "checkForms": true
-    },
+    "method_length": true,
     "method_overwrites_builtin": true,
     "method_parameter_names": false,
     "mix_returning": true,
