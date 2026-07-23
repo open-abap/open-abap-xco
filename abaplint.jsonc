@@ -242,16 +242,7 @@
       "test": "^LTCL_.+$"
     },
     "local_testclass_consistency": true,
-    "local_variable_names": {
-      "exclude": [],
-      "severity": "Error",
-      "patternKind": "required",
-      "ignoreNames": [],
-      "ignorePatterns": [],
-      "expectedData": "^L._.+$",
-      "expectedConstant": "^LC_.+$",
-      "expectedFS": "^<L._.+>$"
-    },
+    "local_variable_names": true,
     "macro_naming": {
       "exclude": [],
       "severity": "Error",
@@ -261,29 +252,13 @@
     "many_parentheses": true,
     "max_one_method_parameter_per_line": true,
     "max_one_statement": true,
-    "message_exists": {
-      "exclude": [],
-      "severity": "Error",
-      "checkPlaceholders": true
-    },
+    "message_exists": true,
     "method_implemented_twice": true,
-    "method_length": {
-      "exclude": [],
-      "severity": "Error",
-      "statements": 100,
-      "errorWhenEmpty": true,
-      "ignoreTestClasses": false,
-      "checkForms": true
-    },
+    "method_length": true,
     "method_overwrites_builtin": true,
     "method_parameter_names": false,
     "mix_returning": true,
-    "modify_only_own_db_tables": {
-      "exclude": [],
-      "severity": "Error",
-      "reportDynamic": true,
-      "ownTables": "^[yz]"
-    },
+    "modify_only_own_db_tables": true,
     "msag_consistency": {
       "exclude": [],
       "severity": "Error",
@@ -330,7 +305,7 @@
     "prefer_xsdbool": true,
     "preferred_compare_operator": true,
     "prefix_is_current_class": {
-      "exclude": [],
+      "exclude": ["xco_cp\\.clas\\.abap"],
       "severity": "Error",
       "omitMeInstanceCalls": true
     },

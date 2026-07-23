@@ -2,8 +2,7 @@ CLASS ltcl_xco_message DEFINITION FINAL FOR TESTING
   DURATION SHORT
   RISK LEVEL HARMLESS.
   PRIVATE SECTION.
-    METHODS get_text FOR TESTING.
-    METHODS scaffold_signatures FOR TESTING.
+    METHODS get_text FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 CLASS ltcl_xco_message IMPLEMENTATION.
@@ -23,13 +22,4 @@ CLASS ltcl_xco_message IMPLEMENTATION.
       exp = 'E:ZXCO_TEST:001 one two three four' ).
   ENDMETHOD.
 
-  METHOD scaffold_signatures.
-    IF 1 = 2.
-      DATA(lo_message) = xco_cp=>sy->message( ).
-      DATA(lv_uuid) = xco_cp=>uuid( )->as( xco_cp_uuid=>format->c36 )->value.
-      DATA(lv_json) = xco_cp_json=>data->from_abap( lv_uuid )->to_string( ).
-    ENDIF.
-
-    cl_abap_unit_assert=>assert_true( abap_true ).
-  ENDMETHOD.
 ENDCLASS.
