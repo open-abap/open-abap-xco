@@ -18,7 +18,7 @@ CLASS xco_cp DEFINITION PUBLIC.
       IMPORTING
         iv_value         TYPE csequence
       RETURNING
-        VALUE(ro_string) TYPE REF TO cl_xco_string_builder.
+        VALUE(ro_string) TYPE REF TO if_xco_string.
 ENDCLASS.
 
 CLASS xco_cp IMPLEMENTATION.
