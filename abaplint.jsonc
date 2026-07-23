@@ -246,7 +246,7 @@
       "exclude": [],
       "severity": "Error",
       "patternKind": "required",
-      "ignoreNames": [],
+      "ignoreNames": ["DUMMY", "XCO_MESSAGE"],
       "ignorePatterns": [],
       "expectedData": "^L._.+$",
       "expectedConstant": "^LC_.+$",
@@ -262,7 +262,7 @@
     "max_one_method_parameter_per_line": true,
     "max_one_statement": true,
     "message_exists": {
-      "exclude": [],
+      "exclude": ["cl_xco_cp_std_sy\\.clas\\.testclasses\\.abap"],
       "severity": "Error",
       "checkPlaceholders": true
     },
@@ -330,7 +330,7 @@
     "prefer_xsdbool": true,
     "preferred_compare_operator": true,
     "prefix_is_current_class": {
-      "exclude": [],
+      "exclude": ["xco_cp\\.clas\\.abap"],
       "severity": "Error",
       "omitMeInstanceCalls": true
     },
