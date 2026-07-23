@@ -1,0 +1,7 @@
+CLASS xco_cp_uuid DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    CLASS-DATA format TYPE REF TO if_xco_cp_uuid_format_factory READ-ONLY.
+ENDCLASS.
+
+CLASS xco_cp_uuid IMPLEMENTATION.
+ENDCLASS.
