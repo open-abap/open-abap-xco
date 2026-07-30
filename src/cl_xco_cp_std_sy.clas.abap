@@ -21,4 +21,8 @@ CLASS cl_xco_cp_std_sy IMPLEMENTATION.
   METHOD if_xco_news~get_messages.
     APPEND if_xco_cp_std_sy~message( ) TO rt_messages.
   ENDMETHOD.
+
+  METHOD if_xco_cp_std_sy~language.
+    ro_language = NEW cl_xco_language( sy-langu ).
+  ENDMETHOD.
 ENDCLASS.
