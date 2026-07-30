@@ -6,8 +6,7 @@ INTERFACE if_xco_language PUBLIC.
     tv_name                  TYPE c LENGTH 16,
     tv_long_text_description TYPE c LENGTH 72.
 
-  DATA
-    value TYPE spras READ-ONLY.
+  DATA value TYPE spras READ-ONLY.
 
   METHODS:
     " as
