@@ -15,4 +15,8 @@ INTERFACE if_xco_cp_tr_request_proprties PUBLIC.
   METHODS get_owner
     RETURNING
       VALUE(ro_owner) TYPE REF TO if_xco_cp_user.
+
+  METHODS get_status
+    RETURNING
+      VALUE(ro_status) TYPE REF TO cl_xco_tr_status.
 ENDINTERFACE.
