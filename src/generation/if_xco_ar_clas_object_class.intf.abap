@@ -1,0 +1,3 @@
+INTERFACE if_xco_ar_clas_object_class PUBLIC.
+
+ENDINTERFACE.

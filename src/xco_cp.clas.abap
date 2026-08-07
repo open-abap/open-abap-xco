@@ -21,9 +21,19 @@ CLASS xco_cp DEFINITION PUBLIC.
         iv_value         TYPE csequence
       RETURNING
         VALUE(ro_string) TYPE REF TO if_xco_string.
+
+    CLASS-METHODS language
+      IMPORTING
+        iv_language        TYPE spras
+      RETURNING
+        VALUE(ro_language) TYPE REF TO if_xco_language.
 ENDCLASS.
 
 CLASS xco_cp IMPLEMENTATION.
+  METHOD language.
+    ASSERT 1 = 2.
+  ENDMETHOD.
+
   METHOD class_constructor.
     xco_cp=>sy = NEW cl_xco_cp_std_sy( ).
   ENDMETHOD.

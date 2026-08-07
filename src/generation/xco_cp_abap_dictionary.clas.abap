@@ -9,19 +9,31 @@ CLASS xco_cp_abap_dictionary DEFINITION PUBLIC.
         iv_name        TYPE sxco_ad_object_name
       RETURNING
         VALUE(ro_type) TYPE REF TO if_xco_ad_data_element.
+
     CLASS-METHODS table_type
       IMPORTING
         iv_name        TYPE sxco_ad_object_name
       RETURNING
         VALUE(ro_type) TYPE REF TO if_xco_ad_table_type.
+
     CLASS-METHODS database_table
       IMPORTING
         iv_name                  TYPE sxco_dbt_object_name
       RETURNING
         VALUE(ro_database_table) TYPE REF TO if_xco_database_table.
+
+    CLASS-METHODS structure
+      IMPORTING
+        iv_name             TYPE sxco_ad_object_name
+      RETURNING
+        VALUE(ro_structure) TYPE REF TO if_xco_ad_structure.
 ENDCLASS.
 
 CLASS xco_cp_abap_dictionary IMPLEMENTATION.
+  METHOD structure.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
   METHOD database_table.
     ASSERT 1 = 'todo'.
   ENDMETHOD.
