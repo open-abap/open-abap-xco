@@ -10,4 +10,8 @@ INTERFACE if_xco_ao_class PUBLIC.
     IMPORTING
       io_change_scenario TYPE REF TO object
       io_api_state       TYPE REF TO cl_xco_ars_api_state.
+
+  METHODS content
+    RETURNING
+      VALUE(ro_content) TYPE REF TO if_xco_clas_content.
 ENDINTERFACE.
