@@ -1,9 +1,10 @@
 INTERFACE if_xco_cp_tr_task_properties PUBLIC.
 
+  DATA task TYPE REF TO if_xco_cp_tr_task READ-ONLY.
+
   METHODS get_status
     RETURNING
       VALUE(ro_status) TYPE REF TO cl_xco_tr_status.
-
 
   TYPES tv_short_description TYPE c LENGTH 60.
   METHODS get_short_description
