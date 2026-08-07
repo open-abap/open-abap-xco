@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_user PUBLIC.
+
+ENDINTERFACE.

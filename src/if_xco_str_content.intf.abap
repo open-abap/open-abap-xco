@@ -1,0 +1,3 @@
+INTERFACE if_xco_str_content PUBLIC.
+
+ENDINTERFACE.

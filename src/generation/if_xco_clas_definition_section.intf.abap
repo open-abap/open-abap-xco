@@ -1,3 +1,4 @@
 INTERFACE if_xco_clas_definition_section PUBLIC.
-  DATA public TYPE REF TO if_xco_gen_clas_s_fo_d_section READ-ONLY.
+  DATA component  TYPE REF TO if_xco_clas_component_factory READ-ONLY.
+  DATA components TYPE REF TO if_xco_clas_components_factory READ-ONLY.
 ENDINTERFACE.

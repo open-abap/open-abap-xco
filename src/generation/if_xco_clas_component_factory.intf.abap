@@ -1,0 +1,3 @@
+INTERFACE if_xco_clas_component_factory PUBLIC.
+
+ENDINTERFACE.
