@@ -3,4 +3,9 @@ INTERFACE if_xco_cp_tr_filter_factory PUBLIC.
   METHODS owner IMPORTING io_constraint TYPE REF TO object RETURNING VALUE(ro_filter) TYPE REF TO object.
   METHODS request_type IMPORTING io_type TYPE REF TO object RETURNING VALUE(ro_filter) TYPE REF TO object.
   METHODS request_target IMPORTING io_constraint TYPE REF TO object RETURNING VALUE(ro_filter) TYPE REF TO object.
+  METHODS kind
+    IMPORTING
+      io_kind        TYPE REF TO cl_xco_tr_kind
+    RETURNING
+      VALUE(ro_kind) TYPE REF TO if_xco_tr_filter.
 ENDINTERFACE.

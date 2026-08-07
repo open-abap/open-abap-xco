@@ -1,0 +1,3 @@
+INTERFACE if_xco_intf_components_factory PUBLIC.
+
+ENDINTERFACE.
