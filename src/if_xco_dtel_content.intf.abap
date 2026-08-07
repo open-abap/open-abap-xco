@@ -9,4 +9,7 @@ INTERFACE if_xco_dtel_content PUBLIC.
     RETURNING VALUE(rv_result) TYPE abap_bool.
   METHODS get_underlying_built_in_type
     RETURNING VALUE(ro_built_in_type) TYPE REF TO cl_xco_ad_built_in_type.
+  METHODS get_data_type
+    RETURNING
+      VALUE(ro_data_type) TYPE REF TO if_xco_dtel_data_type.
 ENDINTERFACE.
