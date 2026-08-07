@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_ar_devc_oc_factory PUBLIC.
+
+ENDINTERFACE.

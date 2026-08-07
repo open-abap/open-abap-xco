@@ -1,0 +1,3 @@
+INTERFACE if_xco_ao_classes PUBLIC.
+
+ENDINTERFACE.
