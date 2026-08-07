@@ -1,0 +1,3 @@
+INTERFACE if_xco_dbt_fields PUBLIC.
+
+ENDINTERFACE.

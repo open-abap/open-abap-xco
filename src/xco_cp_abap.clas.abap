@@ -1,6 +1,6 @@
 CLASS xco_cp_abap DEFINITION PUBLIC.
   PUBLIC SECTION.
-    CLASS-DATA repository TYPE REF TO object READ-ONLY.
+    CLASS-DATA repository TYPE REF TO if_xco_abap_repository READ-ONLY.
 
     CLASS-METHODS class
       IMPORTING

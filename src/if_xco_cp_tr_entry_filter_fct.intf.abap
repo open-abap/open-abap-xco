@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_tr_entry_filter_fct PUBLIC.
+
+ENDINTERFACE.

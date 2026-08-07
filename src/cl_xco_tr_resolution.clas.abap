@@ -1,0 +1,7 @@
+CLASS cl_xco_tr_resolution DEFINITION PUBLIC.
+  PUBLIC SECTION.
+ENDCLASS.
+
+CLASS cl_xco_tr_resolution IMPLEMENTATION.
+
+ENDCLASS.
