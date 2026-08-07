@@ -12,4 +12,8 @@ INTERFACE if_xco_cp_tr_request PUBLIC.
   METHODS properties
     RETURNING
       VALUE(ro_properties) TYPE REF TO if_xco_cp_tr_request_proprties.
+
+  METHODS create_task
+    RETURNING
+      VALUE(ro_task) TYPE REF TO if_xco_cp_tr_task.
 ENDINTERFACE.
