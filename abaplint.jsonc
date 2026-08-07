@@ -369,12 +369,7 @@
     "slow_parameter_passing": true,
     "smim_consistency": true,
     "space_before_colon": true,
-    "space_before_dot": {
-      "exclude": [],
-      "severity": "Error",
-      "ignoreGlobalDefinition": true,
-      "ignoreExceptions": true
-    },
+    "space_before_dot": true,
     "sql_escape_host_variables": true,
     "sql_value_conversion": true,
     "start_at_tab": true,
