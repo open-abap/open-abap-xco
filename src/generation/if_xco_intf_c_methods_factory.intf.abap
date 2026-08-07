@@ -1,0 +1,3 @@
+INTERFACE if_xco_intf_c_methods_factory PUBLIC.
+
+ENDINTERFACE.

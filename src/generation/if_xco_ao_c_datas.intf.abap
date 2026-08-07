@@ -1,0 +1,3 @@
+INTERFACE if_xco_ao_c_datas PUBLIC.
+
+ENDINTERFACE.
