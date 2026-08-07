@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_tr_request_proprties PUBLIC.
+
+ENDINTERFACE.
