@@ -5,14 +5,27 @@ CLASS xco_cp_abap_dictionary DEFINITION PUBLIC.
     CLASS-DATA object_state TYPE REF TO cl_xco_ad_object_state_f READ-ONLY.
 
     CLASS-METHODS data_element
-      IMPORTING iv_name        TYPE sxco_ad_object_name
-      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_data_element.
+      IMPORTING
+        iv_name        TYPE sxco_ad_object_name
+      RETURNING
+        VALUE(ro_type) TYPE REF TO if_xco_ad_data_element.
     CLASS-METHODS table_type
-      IMPORTING iv_name        TYPE sxco_ad_object_name
-      RETURNING VALUE(ro_type) TYPE REF TO if_xco_ad_table_type.
+      IMPORTING
+        iv_name        TYPE sxco_ad_object_name
+      RETURNING
+        VALUE(ro_type) TYPE REF TO if_xco_ad_table_type.
+    CLASS-METHODS database_table
+      IMPORTING
+        iv_name                  TYPE sxco_dbt_object_name
+      RETURNING
+        VALUE(ro_database_table) TYPE REF TO if_xco_database_table.
 ENDCLASS.
 
 CLASS xco_cp_abap_dictionary IMPLEMENTATION.
+  METHOD database_table.
+    ASSERT 1 = 'todo'.
+  ENDMETHOD.
+
   METHOD data_element.
     ASSERT 1 = 'todo'.
   ENDMETHOD.

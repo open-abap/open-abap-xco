@@ -1,0 +1,3 @@
+INTERFACE if_xco_ar_doma_object_factory PUBLIC.
+
+ENDINTERFACE.
