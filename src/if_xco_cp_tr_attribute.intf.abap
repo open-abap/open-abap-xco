@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_tr_attribute PUBLIC.
+  TYPES list TYPE STANDARD TABLE OF REF TO if_xco_cp_tr_attribute WITH DEFAULT KEY.
+ENDINTERFACE.
