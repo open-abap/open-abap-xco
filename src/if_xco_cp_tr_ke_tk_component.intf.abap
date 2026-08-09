@@ -1,0 +1,3 @@
+INTERFACE if_xco_cp_tr_ke_tk_component PUBLIC.
+
+ENDINTERFACE.
