@@ -35,7 +35,7 @@ CLASS xco_cp_abap_dictionary IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD database_table.
-    ASSERT 1 = 'todo'.
+    ro_database_table = NEW lcl_database_table( iv_name ).
   ENDMETHOD.
 
   METHOD data_element.
