@@ -1,0 +1,3 @@
+INTERFACE if_xco_ao_typing_definition PUBLIC.
+
+ENDINTERFACE.
