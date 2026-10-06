@@ -1,6 +1,7 @@
 CLASS xco_cp DEFINITION PUBLIC.
   PUBLIC SECTION.
     CLASS-DATA sy TYPE REF TO if_xco_cp_std_sy READ-ONLY.
+    CLASS-DATA current TYPE REF TO if_xco_cp_std_current READ-ONLY.
 
     CLASS-METHODS class_constructor.
 
@@ -36,6 +37,7 @@ CLASS xco_cp IMPLEMENTATION.
 
   METHOD class_constructor.
     xco_cp=>sy = NEW cl_xco_cp_std_sy( ).
+    xco_cp=>current = NEW cl_xco_cp_std_current( ).
   ENDMETHOD.
 
   METHOD message.
