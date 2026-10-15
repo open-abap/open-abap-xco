@@ -19,9 +19,15 @@ CLASS xco_cp DEFINITION PUBLIC.
 
     CLASS-METHODS string
       IMPORTING
-        iv_value         TYPE csequence
+        iv_value         TYPE clike
       RETURNING
         VALUE(ro_string) TYPE REF TO if_xco_string.
+
+    CLASS-METHODS xstring
+      IMPORTING
+        iv_value          TYPE xstring
+      RETURNING
+        VALUE(ro_xstring) TYPE REF TO if_xco_xstring.
 
     CLASS-METHODS language
       IMPORTING
@@ -57,6 +63,10 @@ CLASS xco_cp IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD string.
-    CLEAR ro_string.
+    ro_string = NEW cl_xco_string( CONV #( iv_value ) ).
+  ENDMETHOD.
+
+  METHOD xstring.
+    ro_xstring = NEW cl_xco_xstring( iv_value ).
   ENDMETHOD.
 ENDCLASS.

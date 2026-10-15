@@ -60,7 +60,12 @@ INTERFACE if_xco_string PUBLIC.
       IMPORTING
         iv_delimiter      TYPE string
       RETURNING
-        VALUE(ro_strings) TYPE REF TO if_xco_strings.
+        VALUE(ro_strings) TYPE REF TO if_xco_strings,
+    as_xstring
+      IMPORTING
+        io_conversion     TYPE REF TO if_xco_string_xstring_cnvrsn
+      RETURNING
+        VALUE(ro_xstring) TYPE REF TO if_xco_xstring.
     " decompose
     "   IMPORTING
     "     io_decomposition  TYPE REF TO if_xco_string_decomposition
@@ -70,10 +75,5 @@ INTERFACE if_xco_string PUBLIC.
     "   IMPORTING
     "     io_type           TYPE REF TO cl_xco_message_type OPTIONAL
     "   RETURNING
-    "     VALUE(ro_message) TYPE REF TO if_xco_message,
-    " as_xstring
-    "   IMPORTING
-    "     io_conversion     TYPE REF TO if_xco_string_xstring_cnvrsn
-    "   RETURNING
-    "     VALUE(ro_xstring) TYPE REF TO if_xco_xstring.
+    "     VALUE(ro_message) TYPE REF TO if_xco_message.
 ENDINTERFACE.

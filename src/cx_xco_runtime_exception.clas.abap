@@ -11,6 +11,12 @@ ENDCLASS.
 
 CLASS cx_xco_runtime_exception IMPLEMENTATION.
   METHOD constructor.
-    assert 1 = 'todo'.
+    super->constructor( previous = previous ).
+    CLEAR me->textid.
+    IF textid IS INITIAL.
+      if_t100_message~t100key = if_t100_message=>default_textid.
+    ELSE.
+      if_t100_message~t100key = textid.
+    ENDIF.
   ENDMETHOD.
 ENDCLASS.

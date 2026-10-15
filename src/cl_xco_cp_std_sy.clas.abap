@@ -25,4 +25,18 @@ CLASS cl_xco_cp_std_sy IMPLEMENTATION.
   METHOD if_xco_cp_std_sy~language.
     ro_language = NEW cl_xco_language( sy-langu ).
   ENDMETHOD.
+
+  METHOD if_xco_cp_std_sy~date.
+    DATA lv_timestamp TYPE tzntstmps.
+
+    GET TIME STAMP FIELD lv_timestamp.
+    ro_date = cl_xco_cp_tm_date=>create( io_time_zone->get_date( lv_timestamp ) ).
+  ENDMETHOD.
+
+  METHOD if_xco_cp_std_sy~time.
+    DATA lv_timestamp TYPE tzntstmps.
+
+    GET TIME STAMP FIELD lv_timestamp.
+    ro_time = cl_xco_cp_tm_time=>create( io_time_zone->get_time( lv_timestamp ) ).
+  ENDMETHOD.
 ENDCLASS.
