@@ -17,7 +17,7 @@ CLASS lcl_code_page IMPLEMENTATION.
 
   METHOD if_xco_string_xstring_cnvrsn~apply.
     TRY.
-        rv_xstring = cl_abap_conv_codepage=>create_out( mv_name )->convert( iv_string ).
+        rv_xstring = cl_abap_conv_codepage=>create_out( codepage = mv_name )->convert( iv_string ).
       CATCH cx_parameter_invalid_range cx_sy_conversion_codepage INTO DATA(lx_error).
         RAISE EXCEPTION NEW cx_xco_runtime_exception( previous = lx_error ).
     ENDTRY.
@@ -25,7 +25,7 @@ CLASS lcl_code_page IMPLEMENTATION.
 
   METHOD if_xco_xstring_string_cnvrsn~apply.
     TRY.
-        rv_string = cl_abap_conv_codepage=>create_in( mv_name )->convert( iv_xstring ).
+        rv_string = cl_abap_conv_codepage=>create_in( codepage = mv_name )->convert( iv_xstring ).
       CATCH cx_parameter_invalid_range cx_sy_conversion_codepage INTO DATA(lx_error).
         RAISE EXCEPTION NEW cx_xco_runtime_exception( previous = lx_error ).
     ENDTRY.

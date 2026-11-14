@@ -775,7 +775,7 @@ CLASS cl_xco_xlsx_file IMPLEMENTATION.
       ENDIF.
       rv_text = substring( val = rv_text
                            len = lv_offset )
-             && cl_abap_conv_codepage=>create_in( `UTF-16BE` )->convert( CONV xstring( to_upper( lv_hex ) ) )
+             && cl_abap_conv_codepage=>create_in( codepage = `UTF-16BE` )->convert( CONV xstring( to_upper( lv_hex ) ) )
              && substring( val = rv_text
                            off = lv_offset + 7 ).
       lv_offset = lv_offset + 1.
