@@ -2,7 +2,7 @@ INTERFACE if_xco_cds_view_entity PUBLIC.
 
   INTERFACES if_xco_cds_entity.
 
-  ALIASES name   FOR if_xco_cds_entity~name.
+  ALIASES name   FOR if_xco_ar_object~name.
   ALIASES fields FOR if_xco_cds_entity~fields.
   ALIASES exists FOR if_xco_ar_object~exists.
 

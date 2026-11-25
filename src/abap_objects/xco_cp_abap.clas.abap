@@ -17,10 +17,10 @@ ENDCLASS.
 
 CLASS xco_cp_abap IMPLEMENTATION.
   METHOD interface.
-    CLEAR ro_interface.
+    ro_interface = NEW cl_xco_ao_interface( iv_name ).
   ENDMETHOD.
 
   METHOD class.
-    CLEAR ro_class.
+    ro_class = NEW cl_xco_ao_class( iv_name ).
   ENDMETHOD.
 ENDCLASS.

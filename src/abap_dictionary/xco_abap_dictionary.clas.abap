@@ -15,10 +15,10 @@ ENDCLASS.
 
 CLASS xco_abap_dictionary IMPLEMENTATION.
   METHOD data_element.
-    ASSERT 1 = 'todo'.
+    ro_type = xco_cp_abap_dictionary=>data_element( iv_name ).
   ENDMETHOD.
 
   METHOD table_type.
-    ASSERT 1 = 'todo'.
+    ro_type = xco_cp_abap_dictionary=>table_type( iv_name ).
   ENDMETHOD.
 ENDCLASS.
