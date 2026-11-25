@@ -47,7 +47,19 @@ CLASS cl_xco_runtime_ddic DEFINITION PUBLIC FINAL CREATE PRIVATE.
 * DATA_ELEMENT, STRUCTURE, TABLE_TYPE, INTERFACE, CLASS, REFERENCE or BUILT_IN
         row_kind    TYPE string,
         row_name    TYPE string,
-      END OF ty_table_type.
+      END OF ty_table_type,
+* a component typed with a data element has its name, an other elementary component its built-in type
+      BEGIN OF ty_structure_component,
+        name         TYPE string,
+        data_element TYPE string,
+        built_in     TYPE ty_built_in_type,
+      END OF ty_structure_component,
+      ty_structure_components TYPE STANDARD TABLE OF ty_structure_component WITH DEFAULT KEY,
+      BEGIN OF ty_structure,
+        found       TYPE abap_bool,
+        description TYPE string,
+        components  TYPE ty_structure_components,
+      END OF ty_structure.
 
     CLASS-METHODS object_type
       IMPORTING
@@ -86,6 +98,26 @@ CLASS cl_xco_runtime_ddic DEFINITION PUBLIC FINAL CREATE PRIVATE.
       RETURNING
         VALUE(rs_table_type) TYPE ty_table_type.
 
+* structures and database tables, both are TABL
+    CLASS-METHODS structure
+      IMPORTING
+        iv_name             TYPE csequence
+      RETURNING
+        VALUE(rs_structure) TYPE ty_structure.
+
+  PRIVATE SECTION.
+    CLASS-METHODS built_in_type
+      IMPORTING
+        io_element         TYPE REF TO cl_abap_elemdescr
+      RETURNING
+        VALUE(rs_built_in) TYPE ty_built_in_type.
+
+* in declaration order, the components of included structures in place of the include
+    CLASS-METHODS add_components
+      IMPORTING
+        io_structure  TYPE REF TO cl_abap_structdescr
+      CHANGING
+        ct_components TYPE ty_structure_components.
 ENDCLASS.
 
 CLASS cl_xco_runtime_ddic IMPLEMENTATION.
@@ -224,9 +256,80 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
     ENDIF.
 
     rs_data_element-domain = ls_dfies-domname.
-    rs_data_element-built_in-type = ls_dfies-datatype.
-    rs_data_element-built_in-length = ls_dfies-leng.
-    rs_data_element-built_in-decimals = ls_dfies-decimals.
+    rs_data_element-built_in = built_in_type( lo_element ).
+  ENDMETHOD.
+
+  METHOD built_in_type.
+    DATA ls_dfies TYPE dfies.
+
+    io_element->get_ddic_field(
+      RECEIVING
+        p_flddescr   = ls_dfies
+      EXCEPTIONS
+        not_found    = 1
+        no_ddic_type = 2
+        OTHERS       = 3 ).
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    rs_built_in-type = ls_dfies-datatype.
+    rs_built_in-length = ls_dfies-leng.
+    rs_built_in-decimals = ls_dfies-decimals.
+  ENDMETHOD.
+
+  METHOD structure.
+    DATA lv_name TYPE string.
+    DATA lo_type TYPE REF TO cl_abap_typedescr.
+
+    lv_name = to_upper( condense( iv_name ) ).
+    cl_abap_typedescr=>describe_by_name(
+      EXPORTING
+        p_name         = lv_name
+      RECEIVING
+        p_descr_ref    = lo_type
+      EXCEPTIONS
+        type_not_found = 1
+        OTHERS         = 2 ).
+    IF sy-subrc <> 0 OR lo_type->kind <> cl_abap_typedescr=>kind_struct OR lo_type->is_ddic_type( ) = abap_false.
+      RETURN.
+    ENDIF.
+    rs_structure-found = abap_true.
+
+* RTTI has no description
+    WRITE '@KERNEL rs_structure.get().description.set(abap.DDIC[lv_name.get()]?.description || "");'.
+
+    add_components(
+      EXPORTING
+        io_structure  = CAST #( lo_type )
+      CHANGING
+        ct_components = rs_structure-components ).
+  ENDMETHOD.
+
+  METHOD add_components.
+    DATA ls_component LIKE LINE OF ct_components.
+
+    LOOP AT io_structure->get_components( ) INTO DATA(ls_rtti).
+      IF ls_rtti-as_include = abap_true.
+        add_components(
+          EXPORTING
+            io_structure  = CAST #( ls_rtti-type )
+          CHANGING
+            ct_components = ct_components ).
+        CONTINUE.
+      ENDIF.
+
+      CLEAR ls_component.
+      ls_component-name = ls_rtti-name.
+      IF ls_rtti-type->kind = cl_abap_typedescr=>kind_elem.
+        IF ls_rtti-type->is_ddic_type( ) = abap_true.
+          ls_component-data_element = ls_rtti-type->get_relative_name( ).
+        ELSE.
+          ls_component-built_in = built_in_type( CAST #( ls_rtti-type ) ).
+        ENDIF.
+      ENDIF.
+      APPEND ls_component TO ct_components.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD table_type.

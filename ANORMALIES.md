@@ -25,7 +25,8 @@ The transpiler emits no content for `APIS` objects. The fixture `zi_xcot_order.a
 
 - `if_xco_data_definition~check_syntax`, `get_state`
 - generation methods on CDS entities: `add_annotation`, `add_association`, `add_composition`, `add_field`, `set_where`, `set_root`, `if_xco_printable~get_text`
-- `content( )` on domains, structures and classes; `get_api_state( )` on domains; `set_api_state( )` on classes
+- `content( )` on domains and classes; `get_api_state( )` on domains; `set_api_state( )` on classes
+- `currency_quantity-reference_field` of structure components stays initial: neither RTTI nor the transpiler output carries the reference field
 
 ## 4. Not verified against a real system
 

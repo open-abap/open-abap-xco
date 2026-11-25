@@ -294,3 +294,108 @@ CLASS ltcl_table_type IMPLEMENTATION.
       exp = 'ZCL_XCOT_MARKER' ).
   ENDMETHOD.
 ENDCLASS.
+
+CLASS ltcl_structure DEFINITION FINAL FOR TESTING
+  DURATION SHORT
+  RISK LEVEL HARMLESS.
+  PRIVATE SECTION.
+    METHODS existing FOR TESTING.
+    METHODS missing FOR TESTING.
+    METHODS short_description FOR TESTING.
+    METHODS component_names FOR TESTING.
+    METHODS component_data_elements FOR TESTING.
+    METHODS component_built_in_type FOR TESTING.
+    METHODS via_table_type_row FOR TESTING.
+ENDCLASS.
+
+CLASS ltcl_structure IMPLEMENTATION.
+  METHOD existing.
+    DATA(lo_structure) = xco_cp_abap_dictionary=>structure( 'ZXCOT_S_ROW' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_structure->name
+      exp = 'ZXCOT_S_ROW' ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_structure->exists( )
+      exp = abap_true ).
+  ENDMETHOD.
+
+  METHOD missing.
+    DATA(lo_structure) = xco_cp_abap_dictionary=>structure( 'ZXCOT_S_MISSING' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_structure->exists( )
+      exp = abap_false ).
+    cl_abap_unit_assert=>assert_initial( lo_structure->components->all->get( ) ).
+  ENDMETHOD.
+
+  METHOD short_description.
+    cl_abap_unit_assert=>assert_equals(
+      act = xco_cp_abap_dictionary=>structure( 'ZXCOT_S_ROW' )->content( )->get_short_description( )
+      exp = 'XCO test row structure' ).
+  ENDMETHOD.
+
+  METHOD component_names.
+* in declaration order
+    DATA lt_names TYPE string_table.
+
+    LOOP AT xco_cp_abap_dictionary=>structure( 'ZXCOT_S_ROW' )->components->all->get( ) INTO DATA(lo_component).
+      APPEND to_upper( lo_component->name ) TO lt_names.
+    ENDLOOP.
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lt_names
+      exp = VALUE string_table(
+        ( `NAME` )
+        ( `STATUS` )
+        ( `POSITION` ) ) ).
+  ENDMETHOD.
+
+  METHOD component_data_elements.
+    DATA(lt_components) = xco_cp_abap_dictionary=>structure( 'ZXCOT_S_ROW' )->components->all->get( ).
+
+    DATA(lo_type) = lt_components[ 1 ]->content( )->get_type( ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_type->is_data_element( )
+      exp = abap_true ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_type->is_built_in_type( )
+      exp = abap_false ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_type->get_data_element( )->name
+      exp = 'ZXCOT_TEXT' ).
+
+* the type in get( ) is the same as get_type( )
+    cl_abap_unit_assert=>assert_equals(
+      act = lt_components[ 2 ]->content( )->get( )-type->get_data_element( )->name
+      exp = 'ZXCOT_STATUS_CODE' ).
+  ENDMETHOD.
+
+  METHOD component_built_in_type.
+    DATA(lt_components) = xco_cp_abap_dictionary=>structure( 'ZXCOT_S_ROW' )->components->all->get( ).
+
+    DATA(lo_type) = lt_components[ 3 ]->content( )->get_type( ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_type->is_data_element( )
+      exp = abap_false ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_type->is_built_in_type( )
+      exp = abap_true ).
+
+    DATA(lo_built_in) = lo_type->get_built_in_type( ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in->type
+      exp = 'NUMC' ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in->length
+      exp = 4 ).
+  ENDMETHOD.
+
+  METHOD via_table_type_row.
+    DATA(lo_structure) = xco_cp_abap_dictionary=>table_type( 'ZXCOT_T_ROW' )->content( )->get_row_type( )->get_structure( ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lines( lo_structure->components->all->get( ) )
+      exp = 3 ).
+  ENDMETHOD.
+ENDCLASS.

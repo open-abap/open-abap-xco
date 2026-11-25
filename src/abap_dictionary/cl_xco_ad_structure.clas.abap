@@ -1,6 +1,8 @@
 CLASS cl_xco_ad_structure DEFINITION PUBLIC FINAL CREATE PUBLIC.
+* read access to a structure, the content is the same object
   PUBLIC SECTION.
     INTERFACES if_xco_ad_structure.
+    INTERFACES if_xco_str_content.
 
     METHODS constructor
       IMPORTING
@@ -10,6 +12,7 @@ ENDCLASS.
 CLASS cl_xco_ad_structure IMPLEMENTATION.
   METHOD constructor.
     if_xco_ar_object~name = to_upper( condense( iv_name ) ).
+    if_xco_ad_structure~components = NEW cl_xco_ad_structure_components( if_xco_ar_object~name ).
   ENDMETHOD.
 
   METHOD if_xco_ar_object~exists.
@@ -34,6 +37,10 @@ CLASS cl_xco_ad_structure IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD if_xco_ad_structure~content.
-    ASSERT 1 = 'todo'.
+    ro_content = me.
+  ENDMETHOD.
+
+  METHOD if_xco_str_content~get_short_description.
+    rv_short_description = cl_xco_runtime_ddic=>structure( if_xco_ar_object~name )-description.
   ENDMETHOD.
 ENDCLASS.
