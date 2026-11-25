@@ -167,7 +167,8 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD data_element.
-* the DDIC data type is derived from the runtime type, the transpiler does not keep DATATYPE
+* the DDIC data type, length and decimals as emitted by the transpiler, resolved via the domain,
+* older transpiler versions do not emit them, then they are derived from the runtime type
     DATA lv_name TYPE string.
 
     IF object_type( iv_name ) <> 'DTEL'.
@@ -183,7 +184,9 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
     WRITE '@KERNEL const b = rs_data_element.get().built_in.get();'.
     WRITE '@KERNEL const set = (type, length, decimals) => {'.
     WRITE '@KERNEL   b.type.set(type); b.length.set(length); b.decimals.set(decimals || 0); };'.
-    WRITE '@KERNEL if (t instanceof T.Character) { set("CHAR", t.getLength()); }'.
+    WRITE '@KERNEL if (meta.datatype === "REF") { }'.
+    WRITE '@KERNEL else if (meta.datatype) { set(meta.datatype, meta.length || 0, meta.decimals); }'.
+    WRITE '@KERNEL else if (t instanceof T.Character) { set("CHAR", t.getLength()); }'.
     WRITE '@KERNEL else if (t instanceof T.Numc) { set("NUMC", t.getLength()); }'.
     WRITE '@KERNEL else if (t instanceof T.Date) { set("DATS", 8); }'.
     WRITE '@KERNEL else if (t instanceof T.Time) { set("TIMS", 6); }'.
