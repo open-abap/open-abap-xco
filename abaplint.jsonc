@@ -41,7 +41,7 @@
     "align_type_expressions": true,
     "allowed_object_naming": {
       "exclude": [
-        "src/random/i_custabapobjdirectoryentry.tabl.xml"
+        "src/non_xco/i_custabapobjdirectoryentry.tabl.xml"
       ]
     },
     "allowed_object_types": {
