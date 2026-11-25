@@ -11,7 +11,10 @@
     }
   ],
   "syntax": {
-    "version": "open-abap",
+    "version": {
+      "release": "open-abap",
+      "language": "Normal"
+    },
     "errorNamespace": "."
   },
   "rules": {
@@ -41,14 +44,10 @@
     "align_type_expressions": true,
     "allowed_object_naming": {
       "exclude": [
-        "src/random/i_custabapobjdirectoryentry.tabl.xml"
+        "src/non_xco/i_custabapobjdirectoryentry.tabl.xml"
       ]
     },
-    "allowed_object_types": {
-      "exclude": [],
-      "severity": "Error",
-      "allowed": []
-    },
+    "allowed_object_types": true,
     "ambiguous_statement": true,
     "avoid_use": {
       "exclude": [],
@@ -140,6 +139,7 @@
       "loopAllowIfSubrc": true,
       "if": true,
       "while": true,
+      "catch": true,
       "case": true,
       "select": true,
       "do": true,
@@ -147,19 +147,10 @@
       "try": true,
       "when": true
     },
-    "exit_or_check": {
-      "exclude": [],
-      "severity": "Error",
-      "allowExit": false,
-      "allowCheck": false
-    },
+    "exit_or_check": true,
     "expand_macros": true,
     "exporting": true,
-    "forbidden_identifier": {
-      "exclude": [],
-      "severity": "Error",
-      "check": []
-    },
+    "forbidden_identifier": true,
     "forbidden_pseudo_and_pragma": {
       "exclude": [],
       "severity": "Error",
@@ -268,17 +259,9 @@
     "method_parameter_names": false,
     "mix_returning": true,
     "modify_only_own_db_tables": true,
-    "msag_consistency": {
-      "exclude": [],
-      "severity": "Error",
-      "numericParameters": true
-    },
+    "msag_consistency": true,
     "names_no_dash": true,
-    "nesting": {
-      "exclude": [],
-      "severity": "Error",
-      "depth": 5
-    },
+    "nesting": true,
     "newline_between_methods": true,
     "no_aliases": false,
     "no_chained_assignment": true,
