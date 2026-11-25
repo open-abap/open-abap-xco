@@ -9,7 +9,7 @@ CLASS cl_xco_cds_field DEFINITION PUBLIC FINAL CREATE PUBLIC.
 
     METHODS get_annotations
       RETURNING
-        VALUE(rt_annotations) TYPE string_table.
+        VALUE(rt_annotations) TYPE cl_xco_runtime_ddic=>ty_annotations.
 
   PRIVATE SECTION.
     DATA ms_field TYPE cl_xco_runtime_ddic=>ty_cds_field.

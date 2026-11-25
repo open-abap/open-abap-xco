@@ -23,13 +23,19 @@ The transpiler emits no content for `APIS` objects. The fixture `zi_xcot_order.a
 
 ## 3. XCO methods still `todo`
 
-- `if_xco_cds_annotations~pick`
 - `if_xco_data_definition~check_syntax`, `get_state`
 - generation methods on CDS entities: `add_annotation`, `add_association`, `add_composition`, `add_field`, `set_where`, `set_root`, `if_xco_printable~get_text`
 - `content( )` on domains, structures and classes; `get_api_state( )` on domains; `set_api_state( )` on classes
 
-## 4. Fixture details not verified against a real system
+## 4. Not verified against a real system
 
+- **Annotation values.** `pick( )->get_value( )->write_to( )` writes:
+  - enums as the symbol without `#` (`#NOT_REQUIRED` gives `NOT_REQUIRED`)
+  - booleans as `X` or space
+  - arrays into internal tables
+  - objects into structures whose component names match the annotation elements ignoring case (`serviceQuality` into `SERVICEQUALITY`)
+
+  `pick( )` returns an unbound reference for an annotation that is not contained.
 - **Name casing.** The case in which SAP returns field and association names is unknown. The tests compare `to_upper( )` values.
 - **Custom entity.** It has no `@ObjectModel.query.implementedBy`, because the fixtures include no query provider class.
 - **Table function.** `implemented by method zcl_xcot_marker=>get_rows` points to a method that does not exist. abaplint does not check this.

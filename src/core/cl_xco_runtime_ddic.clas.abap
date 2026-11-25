@@ -2,10 +2,16 @@ CLASS cl_xco_runtime_ddic DEFINITION PUBLIC FINAL CREATE PRIVATE.
 * open-abap internal: reads the DDIC and CDS metadata the transpiler writes to abap.DDIC
   PUBLIC SECTION.
     TYPES:
+* value: the annotation value as JSON, enums without "#", booleans as "X" or "", object keys in upper case
+      BEGIN OF ty_annotation,
+        name  TYPE string,
+        value TYPE string,
+      END OF ty_annotation,
+      ty_annotations TYPE STANDARD TABLE OF ty_annotation WITH DEFAULT KEY,
       BEGIN OF ty_cds_field,
         name          TYPE string,
         key_indicator TYPE abap_bool,
-        annotations   TYPE string_table,
+        annotations   TYPE ty_annotations,
       END OF ty_cds_field,
       ty_cds_fields TYPE STANDARD TABLE OF ty_cds_field WITH DEFAULT KEY,
       BEGIN OF ty_cds_association,
@@ -14,14 +20,14 @@ CLASS cl_xco_runtime_ddic DEFINITION PUBLIC FINAL CREATE PRIVATE.
 * ASSOCIATION, COMPOSITION or TO_PARENT
         kind        TYPE string,
         exposed     TYPE abap_bool,
-        annotations TYPE string_table,
+        annotations TYPE ty_annotations,
       END OF ty_cds_association,
       ty_cds_associations TYPE STANDARD TABLE OF ty_cds_association WITH DEFAULT KEY,
       BEGIN OF ty_cds,
         found           TYPE abap_bool,
 * VIEW, VIEW_ENTITY, PROJECTION_VIEW, ABSTRACT_ENTITY, CUSTOM_ENTITY, TABLE_FUNCTION, HIERARCHY, ...
         definition_type TYPE string,
-        annotations     TYPE string_table,
+        annotations     TYPE ty_annotations,
         fields          TYPE ty_cds_fields,
         associations    TYPE ty_cds_associations,
       END OF ty_cds,
@@ -110,9 +116,10 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
 
   METHOD cds.
 * annotations are listed by their written name and, for structured values, by every nested path,
-* "ObjectModel.usageType: { serviceQuality: #A }" gives ObjectModel.usageType and ObjectModel.usageType.serviceQuality
+* "ObjectModel.usageType: { serviceQuality: #A }" gives ObjectModel.usageType {"SERVICEQUALITY":"A"}
+* and ObjectModel.usageType.serviceQuality "A"
     DATA lv_name TYPE string.
-    DATA lv_annotation TYPE string.
+    DATA ls_annotation TYPE ty_annotation.
     DATA ls_field LIKE LINE OF rs_cds-fields.
     DATA ls_association LIKE LINE OF rs_cds-associations.
 
@@ -125,19 +132,31 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
     WRITE '@KERNEL if (cds) {'.
     rs_cds-found = abap_true.
     WRITE '@KERNEL rs_cds.get().definition_type.set(cds.definitionType || "");'.
+    WRITE '@KERNEL const isRecord = (v) => v !== null && typeof v === "object" && !Array.isArray(v);'.
+    WRITE '@KERNEL const norm = (v) => {'.
+    WRITE '@KERNEL   if (typeof v === "boolean") { return v ? "X" : ""; }'.
+    WRITE '@KERNEL   if (Array.isArray(v)) { return v.map(norm); }'.
+    WRITE '@KERNEL   if (!isRecord(v)) { return v; }'.
+    WRITE '@KERNEL   if ("#" in v) { return v["#"]; }'.
+    WRITE '@KERNEL   if ("#()" in v) { return v["#()"]; }'.
+    WRITE '@KERNEL   const ret = {};'.
+    WRITE '@KERNEL   for (const k of Object.keys(v)) { ret[k.toUpperCase()] = norm(v[k]); }'.
+    WRITE '@KERNEL   return ret;'.
+    WRITE '@KERNEL };'.
     WRITE '@KERNEL const flat = (list) => {'.
     WRITE '@KERNEL   const ret = [];'.
     WRITE '@KERNEL   const walk = (path, value) => {'.
-    WRITE '@KERNEL     ret.push(path);'.
-    WRITE '@KERNEL     if (value === null || typeof value !== "object" || Array.isArray(value)) { return; }'.
-    WRITE '@KERNEL     for (const k of Object.keys(value).filter(k => !k.startsWith("#"))) { walk(path + "." + k, value[k]); }'.
+    WRITE '@KERNEL     ret.push({name: path, value: JSON.stringify(norm(value))});'.
+    WRITE '@KERNEL     if (!isRecord(value) || "#" in value || "#()" in value) { return; }'.
+    WRITE '@KERNEL     for (const k of Object.keys(value)) { walk(path + "." + k, value[k]); }'.
     WRITE '@KERNEL   };'.
     WRITE '@KERNEL   for (const a of list || []) { walk(a.name, a.value); }'.
     WRITE '@KERNEL   return ret;'.
     WRITE '@KERNEL };'.
     WRITE '@KERNEL for (const a of flat(cds.annotations)) {'.
-    WRITE '@KERNEL   lv_annotation.set(a);'.
-    APPEND lv_annotation TO rs_cds-annotations.
+    WRITE '@KERNEL   ls_annotation.get().name.set(a.name);'.
+    WRITE '@KERNEL   ls_annotation.get().value.set(a.value);'.
+    APPEND ls_annotation TO rs_cds-annotations.
     WRITE '@KERNEL }'.
 
     WRITE '@KERNEL for (const f of cds.fields || []) {'.
@@ -145,8 +164,9 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
     WRITE '@KERNEL   ls_field.get().name.set(f.name);'.
     WRITE '@KERNEL   ls_field.get().key_indicator.set(f.key ? "X" : "");'.
     WRITE '@KERNEL   for (const a of flat(f.annotations)) {'.
-    WRITE '@KERNEL     lv_annotation.set(a);'.
-    APPEND lv_annotation TO ls_field-annotations.
+    WRITE '@KERNEL     ls_annotation.get().name.set(a.name);'.
+    WRITE '@KERNEL     ls_annotation.get().value.set(a.value);'.
+    APPEND ls_annotation TO ls_field-annotations.
     WRITE '@KERNEL   }'.
     APPEND ls_field TO rs_cds-fields.
     WRITE '@KERNEL }'.
@@ -158,8 +178,9 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
     WRITE '@KERNEL   ls_association.get().kind.set(a.type || "");'.
     WRITE '@KERNEL   ls_association.get().exposed.set(a.exposed ? "X" : "");'.
     WRITE '@KERNEL   for (const n of flat(a.annotations)) {'.
-    WRITE '@KERNEL     lv_annotation.set(n);'.
-    APPEND lv_annotation TO ls_association-annotations.
+    WRITE '@KERNEL     ls_annotation.get().name.set(n.name);'.
+    WRITE '@KERNEL     ls_annotation.get().value.set(n.value);'.
+    APPEND ls_annotation TO ls_association-annotations.
     WRITE '@KERNEL   }'.
     APPEND ls_association TO rs_cds-associations.
     WRITE '@KERNEL }'.

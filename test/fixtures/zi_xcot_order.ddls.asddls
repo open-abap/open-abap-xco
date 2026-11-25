@@ -13,6 +13,7 @@ define root view entity ZI_XCOT_ORDER
   key order_id    as OrderId,
   key item_no     as ItemNo,
       status      as Status,
+      @EndUserText.label: 'Order text'
       description as Description,
       _Status,
       _Node

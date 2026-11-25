@@ -480,3 +480,144 @@ CLASS ltcl_view_entity IMPLEMENTATION.
     cl_abap_unit_assert=>assert_initial( xco_cds=>view_entity( 'ZI_XCOT_STATUS' )->associations->all->get( ) ).
   ENDMETHOD.
 ENDCLASS.
+
+CLASS ltcl_annotation_values DEFINITION FINAL FOR TESTING
+  DURATION SHORT
+  RISK LEVEL HARMLESS.
+  PRIVATE SECTION.
+    METHODS string_value FOR TESTING.
+    METHODS enum_value FOR TESTING.
+    METHODS boolean_value FOR TESTING.
+    METHODS array_value FOR TESTING.
+    METHODS object_value FOR TESTING.
+    METHODS nested_path FOR TESTING.
+    METHODS absent FOR TESTING.
+    METHODS field_annotation FOR TESTING.
+
+    METHODS pick
+      IMPORTING
+        iv_name              TYPE sxco_cds_object_name
+        iv_property          TYPE sxco_cds_ann_property
+      RETURNING
+        VALUE(ro_annotation) TYPE REF TO if_xco_cds_annotation.
+ENDCLASS.
+
+CLASS ltcl_annotation_values IMPLEMENTATION.
+  METHOD pick.
+    ro_annotation = xco_cds=>annotations->aggregated->of( xco_cds=>entity( iv_name ) )->pick( iv_property ).
+    cl_abap_unit_assert=>assert_bound(
+      act = ro_annotation
+      msg = |{ iv_name } { iv_property }| ).
+  ENDMETHOD.
+
+  METHOD string_value.
+    DATA lv_label TYPE string.
+
+    pick(
+      iv_name     = 'ZI_XCOT_ORDER'
+      iv_property = 'EndUserText.label' )->get_value( )->write_to( REF #( lv_label ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lv_label
+      exp = `XCO test order` ).
+  ENDMETHOD.
+
+  METHOD enum_value.
+* the enum symbol without the leading #
+    DATA lv_check TYPE string.
+
+    pick(
+      iv_name     = 'ZI_XCOT_ORDER'
+      iv_property = 'AccessControl.authorizationCheck' )->get_value( )->write_to( REF #( lv_check ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lv_check
+      exp = `NOT_REQUIRED` ).
+  ENDMETHOD.
+
+  METHOD boolean_value.
+    DATA lv_compare TYPE abap_bool.
+
+    pick(
+      iv_name     = 'ZI_XCOT_ORDERVIEW'
+      iv_property = 'AbapCatalog.compiler.compareFilter' )->get_value( )->write_to( REF #( lv_compare ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lv_compare
+      exp = abap_true ).
+  ENDMETHOD.
+
+  METHOD array_value.
+    DATA lt_categories TYPE string_table.
+
+    pick(
+      iv_name     = 'ZI_XCOT_ORDERVIEW'
+      iv_property = 'AbapCatalog.viewEnhancementCategory' )->get_value( )->write_to( REF #( lt_categories ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lt_categories
+      exp = VALUE string_table( ( `NONE` ) ) ).
+  ENDMETHOD.
+
+  METHOD object_value.
+* components match the annotation elements by name, regardless of case
+    TYPES:
+      BEGIN OF ty_usage_type,
+        servicequality TYPE string,
+        sizecategory   TYPE string,
+        dataclass      TYPE string,
+      END OF ty_usage_type.
+    DATA ls_usage_type TYPE ty_usage_type.
+
+    pick(
+      iv_name     = 'ZI_XCOT_ORDER'
+      iv_property = 'ObjectModel.usageType' )->get_value( )->write_to( REF #( ls_usage_type ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_usage_type
+      exp = VALUE ty_usage_type(
+        servicequality = `A`
+        sizecategory   = `S`
+        dataclass      = `TRANSACTIONAL` ) ).
+  ENDMETHOD.
+
+  METHOD nested_path.
+    DATA lv_size TYPE string.
+
+    pick(
+      iv_name     = 'ZI_XCOT_ORDER'
+      iv_property = 'ObjectModel.usageType.sizeCategory' )->get_value( )->write_to( REF #( lv_size ) ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lv_size
+      exp = `S` ).
+  ENDMETHOD.
+
+  METHOD absent.
+    cl_abap_unit_assert=>assert_not_bound(
+      xco_cds=>annotations->aggregated->of( xco_cds=>entity( 'ZI_XCOT_ORDER' ) )->pick( 'EndUserText.quickInfo' ) ).
+  ENDMETHOD.
+
+  METHOD field_annotation.
+    DATA lv_label TYPE string.
+
+    DATA(lt_fields) = xco_cds=>view_entity( 'ZI_XCOT_ORDER' )->fields->all->get( ).
+    DATA(lo_description) = lt_fields[ 4 ].
+    cl_abap_unit_assert=>assert_equals(
+      act = to_upper( lo_description->name )
+      exp = 'DESCRIPTION' ).
+
+    DATA(lo_annotations) = xco_cds=>annotations->aggregated->of( lo_description ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_annotations->contain( 'EndUserText.label' )
+      exp = abap_true ).
+    lo_annotations->pick( 'EndUserText.label' )->get_value( )->write_to( REF #( lv_label ) ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lv_label
+      exp = `Order text` ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = xco_cds=>annotations->aggregated->of( lt_fields[ 3 ] )->contain( 'EndUserText.label' )
+      exp = abap_false ).
+  ENDMETHOD.
+ENDCLASS.
