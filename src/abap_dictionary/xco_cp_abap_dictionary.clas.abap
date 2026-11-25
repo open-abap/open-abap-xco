@@ -31,7 +31,7 @@ ENDCLASS.
 
 CLASS xco_cp_abap_dictionary IMPLEMENTATION.
   METHOD structure.
-    ASSERT 1 = 'todo'.
+    ro_structure = NEW cl_xco_ad_structure( iv_name ).
   ENDMETHOD.
 
   METHOD database_table.
@@ -39,10 +39,10 @@ CLASS xco_cp_abap_dictionary IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD data_element.
-    ASSERT 1 = 'todo'.
+    ro_type = NEW cl_xco_ad_data_element( iv_name ).
   ENDMETHOD.
 
   METHOD table_type.
-    ASSERT 1 = 'todo'.
+    ro_type = NEW cl_xco_ad_table_type( iv_name ).
   ENDMETHOD.
 ENDCLASS.

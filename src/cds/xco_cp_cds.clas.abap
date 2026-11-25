@@ -62,11 +62,16 @@ CLASS xco_cp_cds DEFINITION PUBLIC.
         IMPORTING
           iv_name                  TYPE sxco_cds_object_name
         RETURNING
-          VALUE(ro_table_function) TYPE REF TO if_xco_cds_table_function.
+          VALUE(ro_table_function) TYPE REF TO if_xco_cds_table_function,
+      class_constructor.
 
 ENDCLASS.
 
 CLASS xco_cp_cds IMPLEMENTATION.
+  METHOD class_constructor.
+    annotations = NEW cl_xco_cds_api_annotations( ).
+  ENDMETHOD.
+
   METHOD access_control.
     ASSERT 1 = 'todo'.
   ENDMETHOD.
@@ -76,7 +81,7 @@ CLASS xco_cp_cds IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD data_definition.
-    ASSERT 1 = 'todo'.
+    ro_data_definition = NEW cl_xco_cds_data_definition( iv_name ).
   ENDMETHOD.
 
   METHOD metadata_extension.
@@ -84,31 +89,43 @@ CLASS xco_cp_cds IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD entity.
-    ASSERT 1 = 'todo'.
+    ro_entity = NEW cl_xco_cds_entity( iv_name ).
   ENDMETHOD.
 
   METHOD view.
-    ASSERT 1 = 'todo'.
+    ro_view = NEW cl_xco_cds_entity(
+      iv_name            = iv_name
+      iv_definition_type = 'VIEW' ).
   ENDMETHOD.
 
   METHOD view_entity.
-    ASSERT 1 = 'todo'.
+    ro_view_entity = NEW cl_xco_cds_entity(
+      iv_name            = iv_name
+      iv_definition_type = 'VIEW_ENTITY' ).
   ENDMETHOD.
 
   METHOD projection_view.
-    ASSERT 1 = 'todo'.
+    ro_projection_view = NEW cl_xco_cds_entity(
+      iv_name            = iv_name
+      iv_definition_type = 'PROJECTION_VIEW' ).
   ENDMETHOD.
 
   METHOD abstract_entity.
-    ASSERT 1 = 'todo'.
+    ro_abstract_entity = NEW cl_xco_cds_entity(
+      iv_name            = iv_name
+      iv_definition_type = 'ABSTRACT_ENTITY' ).
   ENDMETHOD.
 
   METHOD custom_entity.
-    ASSERT 1 = 'todo'.
+    ro_custom_entity = NEW cl_xco_cds_entity(
+      iv_name            = iv_name
+      iv_definition_type = 'CUSTOM_ENTITY' ).
   ENDMETHOD.
 
   METHOD table_function.
-    ASSERT 1 = 'todo'.
+    ro_table_function = NEW cl_xco_cds_entity(
+      iv_name            = iv_name
+      iv_definition_type = 'TABLE_FUNCTION' ).
   ENDMETHOD.
 
 ENDCLASS.

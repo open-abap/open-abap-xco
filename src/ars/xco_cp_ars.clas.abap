@@ -4,8 +4,15 @@ CLASS xco_cp_ars DEFINITION PUBLIC.
     CLASS-DATA release_state    TYPE REF TO cl_xco_cp_ars_release_state_f READ-ONLY.
     CLASS-DATA api_state        TYPE REF TO cl_xco_ars_api_state READ-ONLY.
     CLASS-DATA visibility       TYPE REF TO cl_xco_ars_visibility_f READ-ONLY.
+
+    CLASS-METHODS class_constructor.
 ENDCLASS.
 
 CLASS xco_cp_ars IMPLEMENTATION.
-
+  METHOD class_constructor.
+    release_contract = NEW #( ).
+    release_state = NEW #( ).
+    api_state = NEW #( ).
+    visibility = NEW #( ).
+  ENDMETHOD.
 ENDCLASS.

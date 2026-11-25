@@ -5,23 +5,27 @@ The regression tests in `src/cds/xco_cds.clas.testclasses.abap` and `src/abap_di
 Status on 2026-11-25, with `@abaplint/transpiler-cli` 2.14.38, `@abaplint/runtime` 2.14.38 and `@abaplint/cli` 2.120.118:
 
 - abaplint: 0 issues.
-- Every pre-existing test still passes (232 of 232).
-- All **44 new tests fail**. Every failure comes from section 1: the transpiler output for the fixtures is present and correct, except for the gaps in section 2.
+- Run one method at a time, **275 of 276 tests pass**, including every pre-existing test. The one failure is `ltcl_entity->released_c1`, see section 1.
+- `npm test` passes, with `released_c1` skipped in `abap_transpile.json`.
 
-## 1. XCO implementation missing (this repository)
+## 1. Open: C1 release state
 
-Each API the tests call is either a stub or never initialized:
+The XCO APIs read the transpiler's runtime metadata (`abap.DDIC` and TADIR) through `src/core/cl_xco_runtime_ddic.clas.abap`. The one exception is the API release state, because the transpiler writes no content for `APIS` objects (section 2.1).
 
-| API | Location | Failure |
-|---|---|---|
-| `xco_cds=>data_definition / entity / view / view_entity` (and all other `xco_cds` / `xco_cp_cds` methods) | `src/cds/xco_cds.clas.abap:78-96` | `ASSERT 1 = 'todo'` raises `CONVT_NO_NUMBER` |
-| `xco_cds=>annotations`, holds `aggregated` | `src/cds/xco_cds.clas.abap:8` | never instantiated |
-| `cl_xco_cds_ann_class->of` | `src/cds/cl_xco_cds_ann_class.clas.abap:13` | `todo` |
-| `xco_cp_data_definition=>type`, holds `view`, `view_entity`, `projection_view`, `abstract_entity`, `custom_entity`, `table_function`, `hierarchy` | `src/cds/xco_cp_data_definition.clas.abap:3` | never instantiated |
-| `xco_cp_ars=>release_contract->c1`, `xco_cp_ars=>release_state->released / not_released` | `src/ars/xco_cp_ars.clas.abap:3-4` | never instantiated |
-| `cl_xco_ars_api_state->get_release_state` | `src/ars/cl_xco_ars_api_state.clas.abap:14` | `todo` |
-| `xco_cp_abap_dictionary=>data_element / table_type` | `src/abap_dictionary/xco_cp_abap_dictionary.clas.abap:41-46` | `todo` |
-| `xco_abap_dictionary=>data_element / table_type` | `src/abap_dictionary/xco_abap_dictionary.clas.abap:17-22` | `todo` |
+`if_xco_cds_entity~get_api_state` therefore behaves as follows:
+
+- **No `APIS` object in TADIR:** it returns `not_released`. This is correct, because without an APIS object nothing is released.
+- **An `APIS` object exists:** it raises `cx_xco_runtime_exception`, because the contract and state are unknown. Answering `not_released` would be silently wrong.
+
+`released_c1` passes once the transpiler writes the APIS content, for example as `abap.DDIC` entries or rows in a release-state table, and `get_api_state` reads it.
+
+Implementation notes that affect results:
+
+- **Annotations.** `aggregated` and `direct` both return the annotations written in the entity's own source; `inherited`, `derived` and `metadata_extension` return none (section 2.2). `contain( )` ignores case, and also matches nested paths of structured values, for example `ObjectModel.usageType.serviceQuality`. `pick( )` is still `todo`.
+- **Typed handles.** `xco_cds=>view / view_entity / projection_view / abstract_entity / custom_entity / table_function( )->exists( )` is only true if the DDLS has that definition type. `xco_cds=>entity( )` accepts any type.
+- **Associations.** `associations->all->get( )` lists the exposed associations, in declaration order, without compositions. `compositions->all->get( )` lists the compositions.
+- **Data elements.** The built-in type is derived from the runtime type (section 2.6).
+- **Domains and repository objects.** Domains, classes and interfaces are checked against TADIR. Their content (`content( )`, `get_api_state( )`) is still `todo`.
 
 ## 2. Transpiler runtime metadata gaps
 
@@ -52,5 +56,5 @@ The tests assert the following behaviour, but `abap.DDIC` / `init.mjs` does not 
 
 ## 4. Harness notes
 
-- **The unit runner stops at the first failure.** `output/index.mjs` exits on the first failing method. With these tests in place, `npm run unit` stops at `XCO_CDS ltcl_data_definition->existing`, so pre-existing tests that sort after it (`XCO_CP_ABAP_DICTIONARY`, `XCO_CP_CALL_STACK`, `XCO_CP_TIME`, `XCO_CP_XLSX`) do not run. CI stays red until section 1 is implemented, unless the new classes are listed under the transpiler's `options.skip`.
+- **`released_c1` is skipped.** It is listed under `options.skip` in `abap_transpile.json`, so `npm test` passes and reports it as "skipped due to configuration". Remove the entry once section 1 is resolved. Note that `output/index.mjs` stops at the first failing method, so an unskipped failure hides every test that sorts after it.
 - **Fixtures are outside `src/`.** They live in `test/fixtures/`, which `abaplint.jsonc` (`global.files`) and `abap_transpile.json` (`input_folder`) both include. Projects that depend on open-abap-xco through `/src/**` therefore do not load them.

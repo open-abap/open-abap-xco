@@ -123,13 +123,17 @@ CLASS ltcl_data_definition IMPLEMENTATION.
 
     LOOP AT lt_types INTO DATA(lo_type).
       cl_abap_unit_assert=>assert_bound( lo_type ).
+      DATA(lv_same) = 0.
+      LOOP AT lt_types INTO DATA(lo_other).
+        IF lo_other = lo_type.
+          lv_same = lv_same + 1.
+        ENDIF.
+      ENDLOOP.
+      cl_abap_unit_assert=>assert_equals(
+        act = lv_same
+        exp = 1
+        msg = |type { lo_type->value } is shared| ).
     ENDLOOP.
-
-    SORT lt_types BY table_line.
-    DELETE ADJACENT DUPLICATES FROM lt_types COMPARING table_line.
-    cl_abap_unit_assert=>assert_equals(
-      act = lines( lt_types )
-      exp = 7 ).
   ENDMETHOD.
 
   METHOD type_view.
