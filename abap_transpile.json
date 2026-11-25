@@ -16,7 +16,7 @@
       "preFunction": "setup"
     },
     "skip": [
-      {"object": "XCO_CDS", "class": "ltcl_entity", "method": "released_c1", "note": "APIS content not emitted by the transpiler, see ANORMALIES.md"}
+      {"object": "XCO_CDS", "class": "ltcl_entity", "method": "released_c1", "note": "APIS content not emitted by the transpiler, see ANOMALIES.md"}
     ]
   }
 }
