@@ -167,40 +167,45 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD data_element.
-* the DDIC data type, length and decimals as emitted by the transpiler, resolved via the domain,
-* older transpiler versions do not emit them, then they are derived from the runtime type
-    DATA lv_name TYPE string.
+* via RTTI, a DDIC type of kind elementary or reference is a data element, a reference type has no built-in type
+    DATA lo_type TYPE REF TO cl_abap_typedescr.
+    DATA lo_element TYPE REF TO cl_abap_elemdescr.
+    DATA ls_dfies TYPE dfies.
 
-    IF object_type( iv_name ) <> 'DTEL'.
+    cl_abap_typedescr=>describe_by_name(
+      EXPORTING
+        p_name         = to_upper( condense( iv_name ) )
+      RECEIVING
+        p_descr_ref    = lo_type
+      EXCEPTIONS
+        type_not_found = 1
+        OTHERS         = 2 ).
+    IF sy-subrc <> 0
+        OR lo_type->is_ddic_type( ) = abap_false
+        OR ( lo_type->kind <> cl_abap_typedescr=>kind_elem AND lo_type->kind <> cl_abap_typedescr=>kind_ref ).
       RETURN.
     ENDIF.
-    lv_name = to_upper( condense( iv_name ) ).
     rs_data_element-found = abap_true.
 
-    WRITE '@KERNEL const meta = abap.DDIC[lv_name.get()];'.
-    WRITE '@KERNEL rs_data_element.get().domain.set(meta.domain || "");'.
-    WRITE '@KERNEL const t = meta.type();'.
-    WRITE '@KERNEL const T = abap.types;'.
-    WRITE '@KERNEL const b = rs_data_element.get().built_in.get();'.
-    WRITE '@KERNEL const set = (type, length, decimals) => {'.
-    WRITE '@KERNEL   b.type.set(type); b.length.set(length); b.decimals.set(decimals || 0); };'.
-    WRITE '@KERNEL if (meta.datatype === "REF") { }'.
-    WRITE '@KERNEL else if (meta.datatype) { set(meta.datatype, meta.length || 0, meta.decimals); }'.
-    WRITE '@KERNEL else if (t instanceof T.Character) { set("CHAR", t.getLength()); }'.
-    WRITE '@KERNEL else if (t instanceof T.Numc) { set("NUMC", t.getLength()); }'.
-    WRITE '@KERNEL else if (t instanceof T.Date) { set("DATS", 8); }'.
-    WRITE '@KERNEL else if (t instanceof T.Time) { set("TIMS", 6); }'.
-    WRITE '@KERNEL else if (t instanceof T.Packed) { set("DEC", t.getLength() * 2 - 1, t.getDecimals()); }'.
-    WRITE '@KERNEL else if (t instanceof T.Integer8) { set("INT8", 19); }'.
-    WRITE '@KERNEL else if (t instanceof T.Integer) { set("INT4", 10); }'.
-    WRITE '@KERNEL else if (t instanceof T.HexUInt8) { set("INT1", 3); }'.
-    WRITE '@KERNEL else if (t instanceof T.Float) { set("FLTP", 16); }'.
-    WRITE '@KERNEL else if (t instanceof T.Hex) { set("RAW", t.getLength()); }'.
-    WRITE '@KERNEL else if (t instanceof T.XString) { set("RAWSTRING", 0); }'.
-    WRITE '@KERNEL else if (t instanceof T.String) { set("STRING", 0); }'.
-    WRITE '@KERNEL else if (t instanceof T.DecFloat16) { set("DF16_DEC", 16); }'.
-    WRITE '@KERNEL else if (t instanceof T.DecFloat34) { set("DF34_DEC", 34); }'.
-    WRITE '@KERNEL else if (t instanceof T.UTCLong) { set("UTCLONG", 27); }'.
+    IF lo_type->kind <> cl_abap_typedescr=>kind_elem.
+      RETURN.
+    ENDIF.
+    lo_element ?= lo_type.
+    lo_element->get_ddic_field(
+      RECEIVING
+        p_flddescr   = ls_dfies
+      EXCEPTIONS
+        not_found    = 1
+        no_ddic_type = 2
+        OTHERS       = 3 ).
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    rs_data_element-domain = ls_dfies-domname.
+    rs_data_element-built_in-type = ls_dfies-datatype.
+    rs_data_element-built_in-length = ls_dfies-leng.
+    rs_data_element-built_in-decimals = ls_dfies-decimals.
   ENDMETHOD.
 
   METHOD table_type.
