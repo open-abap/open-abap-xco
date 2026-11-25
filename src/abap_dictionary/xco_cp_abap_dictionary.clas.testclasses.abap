@@ -83,6 +83,8 @@ CLASS ltcl_data_element DEFINITION FINAL FOR TESTING
     METHODS built_in_type FOR TESTING.
     METHODS underlying_built_in_types FOR TESTING.
     METHODS on_premise_entry_point FOR TESTING.
+    METHODS built_in_type_clnt FOR TESTING.
+    METHODS built_in_type_even_dec FOR TESTING.
 ENDCLASS.
 
 CLASS ltcl_data_element IMPLEMENTATION.
@@ -155,6 +157,35 @@ CLASS ltcl_data_element IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       act = lo_content->get_underlying_built_in_type( )->length
       exp = 40 ).
+  ENDMETHOD.
+
+  METHOD built_in_type_clnt.
+* CLNT, not CHAR, both are character-like with the same runtime type
+    DATA(lo_built_in_type) = xco_cp_abap_dictionary=>data_element( 'ZXCOT_CLIENT'
+      )->content( )->get_data_type( )->get_built_in_type( ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in_type->type
+      exp = 'CLNT' ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in_type->length
+      exp = 3 ).
+  ENDMETHOD.
+
+  METHOD built_in_type_even_dec.
+* DEC 4 and DEC 5 have the same packed runtime length, the DDIC length is 4
+    DATA(lo_built_in_type) = xco_cp_abap_dictionary=>data_element( 'ZXCOT_AMOUNT'
+      )->content( )->get_data_type( )->get_built_in_type( ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in_type->type
+      exp = 'DEC' ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in_type->length
+      exp = 4 ).
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_built_in_type->decimals
+      exp = 2 ).
   ENDMETHOD.
 
   METHOD on_premise_entry_point.

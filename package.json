@@ -21,8 +21,8 @@
   "dependencies": {
     "@abaplint/cli": "^2.120.118",
     "@abaplint/database-sqlite": "^2.14.35",
-    "@abaplint/runtime": "^2.14.38",
-    "@abaplint/transpiler-cli": "^2.14.38"
+    "@abaplint/runtime": "^2.14.39",
+    "@abaplint/transpiler-cli": "^2.14.39"
   },
   "devDependencies": {
     "rimraf": "^6.1.4"

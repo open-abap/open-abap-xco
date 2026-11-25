@@ -2,7 +2,7 @@
 
 Open issues found by the regression tests in `src/cds/xco_cds.clas.testclasses.abap` and `src/abap_dictionary/xco_cp_abap_dictionary.clas.testclasses.abap`, which run against the synthetic fixtures in `test/fixtures/`.
 
-Checked with `@abaplint/transpiler-cli` 2.14.38, `@abaplint/runtime` 2.14.38 and `@abaplint/cli` 2.120.118.
+Checked with `@abaplint/transpiler-cli` 2.14.39, `@abaplint/runtime` 2.14.39 and `@abaplint/cli` 2.120.118.
 
 ## 1. C1 release state
 
@@ -18,8 +18,7 @@ The transpiler emits no content for `APIS` objects. The fixture `zi_xcot_order.a
 2. **Hierarchy elements.** For `ZI_XCOT_HIERARCHY` the output has `definitionType: "HIERARCHY"`, but `fields: []`. The element list `{ NodeId, ParentId }` and the hierarchy source and association are not captured.
 3. **Projection view row type.** `abap.DDIC["ZC_XCOT_ORDER"].type()` throws `Void type: DDLS:fieldname:ZC_XCOT_ORDER`, because projected element types are not resolved from the base entity.
 4. **Domains.** `DOMA` gets no `abap.DDIC` entry. Apart from its TADIR row, a domain is visible only through `DTEL.domain` / `DTEL.fixedValues`. Its own data type, length and output attributes are not available.
-5. **Data element built-in type.** A DTEL entry carries only the runtime ABAP type, not the DDIC `DATATYPE` / `LENG` / `DECIMALS`. CHAR, CLNT, LANG, CUKY and UNIT all map to `Character`, so `get_built_in_type( )->type` reports CHAR for all of them.
-6. **DDLS description.** `description` comes from `@EndUserText.label`, not from `DDTEXT` in the `.ddls.xml`. `ZI_XCOT_HIERARCHY` has no label, so its description is `undefined`.
+5. **DDLS description.** `description` comes from `@EndUserText.label`, not from `DDTEXT` in the `.ddls.xml`. `ZI_XCOT_HIERARCHY` has no label, so its description is `undefined`.
 
 ## 3. XCO methods still `todo`
 
