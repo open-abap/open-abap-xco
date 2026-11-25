@@ -230,29 +230,60 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD table_type.
+* the row kind and name via RTTI, a DDIC row type is a data element, structure or table type
     DATA lv_name TYPE string.
+    DATA lo_type TYPE REF TO cl_abap_typedescr.
+    DATA lo_table TYPE REF TO cl_abap_tabledescr.
+    DATA lo_line TYPE REF TO cl_abap_datadescr.
+    DATA lo_reference TYPE REF TO cl_abap_refdescr.
+    DATA lo_referenced TYPE REF TO cl_abap_typedescr.
 
-    IF object_type( iv_name ) <> 'TTYP'.
+    lv_name = to_upper( condense( iv_name ) ).
+    cl_abap_typedescr=>describe_by_name(
+      EXPORTING
+        p_name         = lv_name
+      RECEIVING
+        p_descr_ref    = lo_type
+      EXCEPTIONS
+        type_not_found = 1
+        OTHERS         = 2 ).
+    IF sy-subrc <> 0 OR lo_type->kind <> cl_abap_typedescr=>kind_table OR lo_type->is_ddic_type( ) = abap_false.
       RETURN.
     ENDIF.
-    lv_name = to_upper( condense( iv_name ) ).
     rs_table_type-found = abap_true.
 
-    " todo: this part should be possible via RTTI?
-    WRITE '@KERNEL const meta = abap.DDIC[lv_name.get()];'.
-    WRITE '@KERNEL rs_table_type.get().description.set(meta.description || "");'.
-    WRITE '@KERNEL const row = meta.type().getRowType();'.
-    WRITE '@KERNEL const setRow = (kind, name) => {'.
-    WRITE '@KERNEL   rs_table_type.get().row_kind.set(kind);'.
-    WRITE '@KERNEL   rs_table_type.get().row_name.set((name || "").toUpperCase()); };'.
-    WRITE '@KERNEL const rtti = typeof row.getRTTIName === "function" ? row.getRTTIName() || "" : "";'.
-    WRITE '@KERNEL const ddic = typeof row.getDDICName === "function" ? row.getDDICName() : undefined;'.
-    WRITE '@KERNEL if (typeof row.getRowType === "function") { setRow("TABLE_TYPE", row.getQualifiedName()); }'.
-    WRITE '@KERNEL else if (rtti.startsWith("\\CLASS=")) { setRow("CLASS", rtti.substring(7)); }'.
-    WRITE '@KERNEL else if (rtti.startsWith("\\INTERFACE=")) { setRow("INTERFACE", rtti.substring(11)); }'.
-    WRITE '@KERNEL else if (row instanceof abap.types.Structure) { setRow("STRUCTURE", ddic || row.getQualifiedName()); }'.
-    WRITE '@KERNEL else if (row instanceof abap.types.DataReference) { setRow("REFERENCE", ""); }'.
-    WRITE '@KERNEL else if (ddic && abap.DDIC[ddic.toUpperCase()]?.objectType === "DTEL") { setRow("DATA_ELEMENT", ddic); }'.
-    WRITE '@KERNEL else { setRow("BUILT_IN", ""); }'.
+* RTTI has no description
+    WRITE '@KERNEL rs_table_type.get().description.set(abap.DDIC[lv_name.get()]?.description || "");'.
+
+    lo_table ?= lo_type.
+    lo_line = lo_table->get_table_line_type( ).
+    CASE lo_line->kind.
+      WHEN cl_abap_typedescr=>kind_table.
+        rs_table_type-row_kind = 'TABLE_TYPE'.
+        rs_table_type-row_name = lo_line->get_relative_name( ).
+      WHEN cl_abap_typedescr=>kind_struct.
+        rs_table_type-row_kind = 'STRUCTURE'.
+        rs_table_type-row_name = lo_line->get_relative_name( ).
+      WHEN cl_abap_typedescr=>kind_ref.
+        lo_reference ?= lo_line.
+        lo_referenced = lo_reference->get_referenced_type( ).
+        CASE lo_referenced->kind.
+          WHEN cl_abap_typedescr=>kind_class.
+            rs_table_type-row_kind = 'CLASS'.
+            rs_table_type-row_name = lo_referenced->get_relative_name( ).
+          WHEN cl_abap_typedescr=>kind_intf.
+            rs_table_type-row_kind = 'INTERFACE'.
+            rs_table_type-row_name = lo_referenced->get_relative_name( ).
+          WHEN OTHERS.
+            rs_table_type-row_kind = 'REFERENCE'.
+        ENDCASE.
+      WHEN OTHERS.
+        IF lo_line->is_ddic_type( ) = abap_true.
+          rs_table_type-row_kind = 'DATA_ELEMENT'.
+          rs_table_type-row_name = lo_line->get_relative_name( ).
+        ELSE.
+          rs_table_type-row_kind = 'BUILT_IN'.
+        ENDIF.
+    ENDCASE.
   ENDMETHOD.
 ENDCLASS.
