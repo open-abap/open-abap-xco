@@ -69,7 +69,7 @@ ENDCLASS.
 
 CLASS xco_cp_cds IMPLEMENTATION.
   METHOD class_constructor.
-    annotations = NEW cl_xco_cds_api_annotations( ).
+    annotations = NEW cl_xco_cp_cds_api_annotations( ).
   ENDMETHOD.
 
   METHOD access_control.
@@ -81,7 +81,7 @@ CLASS xco_cp_cds IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD data_definition.
-    ro_data_definition = NEW cl_xco_cds_data_definition( iv_name ).
+    ro_data_definition = NEW cl_xco_data_definition( iv_name ).
   ENDMETHOD.
 
   METHOD metadata_extension.

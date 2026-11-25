@@ -1,4 +1,4 @@
-CLASS cl_xco_cds_data_definition DEFINITION PUBLIC FINAL CREATE PUBLIC.
+CLASS cl_xco_data_definition DEFINITION PUBLIC FINAL CREATE PUBLIC.
   PUBLIC SECTION.
     INTERFACES if_xco_data_definition.
 
@@ -14,7 +14,7 @@ CLASS cl_xco_cds_data_definition DEFINITION PUBLIC FINAL CREATE PUBLIC.
         VALUE(rv_name) TYPE sxco_cds_object_name.
 ENDCLASS.
 
-CLASS cl_xco_cds_data_definition IMPLEMENTATION.
+CLASS cl_xco_data_definition IMPLEMENTATION.
   METHOD constructor.
     if_xco_data_definition~name = to_upper( condense( iv_name ) ).
     if_xco_ar_object~name = if_xco_data_definition~name.

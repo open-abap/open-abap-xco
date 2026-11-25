@@ -1,4 +1,4 @@
-CLASS cl_xco_ad_domain DEFINITION PUBLIC FINAL CREATE PUBLIC.
+CLASS cl_xco_domain DEFINITION PUBLIC FINAL CREATE PUBLIC.
 * the transpiler writes no runtime metadata for domains, only their TADIR entry
   PUBLIC SECTION.
     INTERFACES if_xco_domain.
@@ -8,7 +8,7 @@ CLASS cl_xco_ad_domain DEFINITION PUBLIC FINAL CREATE PUBLIC.
         iv_name TYPE csequence.
 ENDCLASS.
 
-CLASS cl_xco_ad_domain IMPLEMENTATION.
+CLASS cl_xco_domain IMPLEMENTATION.
   METHOD constructor.
     if_xco_ar_object~name = to_upper( condense( iv_name ) ).
   ENDMETHOD.

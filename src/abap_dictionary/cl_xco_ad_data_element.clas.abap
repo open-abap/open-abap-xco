@@ -98,7 +98,7 @@ CLASS cl_xco_ad_data_element IMPLEMENTATION.
   METHOD if_xco_dtel_data_type~get_domain.
     DATA(lv_domain) = read( )-domain.
     IF lv_domain IS NOT INITIAL.
-      ro_domain = NEW cl_xco_ad_domain( lv_domain ).
+      ro_domain = NEW cl_xco_domain( lv_domain ).
     ENDIF.
   ENDMETHOD.
 

@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>CL_XCO_AD_DOMAIN</CLSNAME>
+    <CLSNAME>CL_XCO_DOMAIN</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>CL_XCO_AD_DOMAIN</DESCRIPT>
+    <DESCRIPT>CL_XCO_DOMAIN</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
