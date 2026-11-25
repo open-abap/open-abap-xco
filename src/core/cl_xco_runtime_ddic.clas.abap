@@ -217,6 +217,7 @@ CLASS cl_xco_runtime_ddic IMPLEMENTATION.
     lv_name = to_upper( condense( iv_name ) ).
     rs_table_type-found = abap_true.
 
+    " todo: this part should be possible via RTTI?
     WRITE '@KERNEL const meta = abap.DDIC[lv_name.get()];'.
     WRITE '@KERNEL rs_table_type.get().description.set(meta.description || "");'.
     WRITE '@KERNEL const row = meta.type().getRowType();'.
