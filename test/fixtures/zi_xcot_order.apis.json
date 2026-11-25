@@ -1,0 +1,29 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "originalLanguage": "en",
+    "description": "API Release State of ZI_XCOT_ORDER"
+  },
+  "directoryObjectKey": {
+    "type": "DDLS",
+    "name": "ZI_XCOT_ORDER"
+  },
+  "apis": [
+    {
+      "releasableObjectKey": {
+        "type": "CDS_STOB",
+        "name": "ZI_XCOT_ORDER"
+      },
+      "apiReleaseStates": [
+        {
+          "releaseContract": "c1",
+          "releaseState": "released",
+          "visibility": {
+            "useInCloudDevelopment": true,
+            "useInKeyUserApps": false
+          }
+        }
+      ]
+    }
+  ]
+}

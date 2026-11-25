@@ -1,0 +1,2 @@
+INTERFACE zif_xcot_marker PUBLIC.
+ENDINTERFACE.

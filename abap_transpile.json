@@ -1,5 +1,5 @@
 {
-  "input_folder": "src",
+  "input_folder": ["src", "test"],
   "input_filter": [],
   "libs": [{
     "url": "https://github.com/open-abap/open-abap-core"
