@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/open-abap/open-abap-xco#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.120.118",
+    "@abaplint/cli": "^2.120.123",
     "@abaplint/database-sqlite": "^2.14.35",
-    "@abaplint/runtime": "^2.14.39",
-    "@abaplint/transpiler-cli": "^2.14.39"
+    "@abaplint/runtime": "^2.14.41",
+    "@abaplint/transpiler-cli": "^2.14.41"
   },
   "devDependencies": {
     "rimraf": "^6.1.4"
